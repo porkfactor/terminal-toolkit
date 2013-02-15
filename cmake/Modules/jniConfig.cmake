@@ -1,0 +1,15 @@
+CHECKVAR(JAVA_HOME)
+set(jni_FOUND TRUE)
+
+if(WIN32)
+  set(jni_INCLUDE_DIR ${JAVA_HOME}/include ${JAVA_HOME}/include/win32)
+  set(jni_LIB_DIR ${JAVA_HOME}/lib)
+  set(jni_LIBS jawt jvm)
+elseif(APPLE)
+  set(jni_BIN_DIR ${JAVA_HOME}/Commands)
+  set(jni_INCLUDE_DIR ${JAVA_HOME}/Headers)
+  set(jni_LIB_DIR ${JAVA_HOME}/Libraries)
+else()
+  set(jni_INCLUDE_DIR ${JAVA_HOME}/include ${JAVA_HOME}/include/linux)
+endif()
+

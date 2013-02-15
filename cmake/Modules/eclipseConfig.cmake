@@ -1,0 +1,24 @@
+#----eclipse specific part----#
+set(EQUINOX_LAUNCHER ${ECLIPSEDIR}/plugins/org.eclipse.equinox.launcher_1.2.0.v20110502.jar CACHE FILEPATH "Equinox launcher settings")
+set(ANT_RUNNER org.eclipse.ant.core.antRunner CACHE STRING "ANT_RUNNER name")
+set(ECLIPSE_BUILDFILE ${ECLIPSEDIR}/plugins/org.eclipse.pde.build_3.7.0.v20110512-1320/scripts/productBuild/productBuild.xml CACHE FILEPATH "ECLIPSE_BUILDFILE")
+set(ECLIPSE_BASE ${ECLIPSEDIR}/../ CACHE PATH "ECLIPSE_BASE")
+
+if(WIN32)
+	set(ECLIPSE_BASEOS win32 CACHE STRING "ECLIPSE_BASEOS")
+	set(ECLIPSE_BASEWS win32 CACHE STRING "ECLIPSE_BASEWS")
+
+elseif(APPLE)
+	set(ECLIPSE_BASEOS linux CACHE STRING "ECLIPSE_BASEOS")
+	set(ECLIPSE_BASEWS gtk CACHE STRING "ECLIPSE_BASEWS")
+else()
+	set(ECLIPSE_BASEOS linux CACHE STRING "ECLIPSE_BASEOS")
+	set(ECLIPSE_BASEWS gtk CACHE STRING "ECLIPSE_BASEWS")
+endif()
+
+if(DEFINED BUS32)
+	set(ECLIPSE_BASEARCH x86 CACHE STRING "ECLIPSE_BASEARCH")
+else()
+	set(ECLIPSE_BASEARCH x86_64 CACHE STRING "ECLIPSE_BASEARCH")
+endif()
+#----eclipse specific part----#
