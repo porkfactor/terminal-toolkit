@@ -1,6 +1,8 @@
-#include <api/c++/dialogs/FileDialog.h>
+#include <api/c++/FileDialog.h>
 
 namespace terminal {
   namespace toolkit {
+    FileDialog::~FileDialog() {
+    }
   }
 }

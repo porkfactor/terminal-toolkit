@@ -10,16 +10,21 @@
 
 namespace terminal {
   namespace toolkit {
-    class IComponent;
-    class IControl;
-    class IContainer;
+    class Control;
+    class Composite;
+    class Layout;
     class Rectangle;
-    class Window;
+    class Scrollable;
+    class ScrollBar;
+    class Shell;
+    class Widget;
 
-    typedef POINTER(IComponent) component_ptr;
-    typedef POINTER(IControl) control_ptr;
-    typedef POINTER(IContainer) container_ptr;
-    typedef POINTER(Window) window_ptr;
+    typedef POINTER(Control) control_ptr;
+    typedef POINTER(Composite) composite_ptr;
+    typedef POINTER(Layout) layout_ptr;
+    typedef POINTER(ScrollBar) scrollbar_ptr;
+    typedef POINTER(Shell) shell_ptr;
+    typedef POINTER(Widget) widget_ptr;
   }
 }
 

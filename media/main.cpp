@@ -4,33 +4,34 @@
 #include <Windows.h>
 #include <conio.h>
 
-#include <api/c++/windows/Window.h>
-#include <api/c++/containers/GroupBox.h>
-#include <api/c++/controls/Text.h>
-#include <api/c++/controls/Label.h>
-#include <api/c++/controls/Button.h>
+#include <api/c++/Shell.h>
+#include <api/c++/Group.h>
+#include <api/c++/Text.h>
+#include <api/c++/Label.h>
+#include <api/c++/Button.h>
+#include <api/c++/Display.h>
 
 namespace tt = terminal::toolkit;
 
 int main(int argc, char **argv) {
   ::setlocale(LC_ALL, "");
 
-  tt::Window win(0, 0, 80, 24);
-#if 1
-  tt::GroupBox box(&win);
-  tt::GroupBox box2(&box);
+  tt::Display display;
+  tt::Shell shell;
+
+  tt::Group box(&shell);
+  tt::Group box2(&box);
   tt::Text t1(&box);
   tt::Label l1(&box);
   tt::Button b1(&box);
 
   box.setText("cocks");
   box2.setText("tits");
-#endif
 
-  getch();
-
-  win.setBounds(0, 0, 80, 24);
-  win.update();
+  shell.setSize(80, 24);
+  box.setBounds(0, 0, 80, 24);
+  box2.setBounds(1, 1, 78, 22);
+  shell.redraw();
 
 
   Sleep(3000);

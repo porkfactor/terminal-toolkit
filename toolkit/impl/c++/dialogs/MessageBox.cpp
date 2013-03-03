@@ -1,1 +1,8 @@
-#include <api/c++/dialogs/MessageBox.h>
+#include <api/c++/MessageBox.h>
+
+namespace terminal {
+  namespace toolkit {
+    MessageBox::~MessageBox() {
+    }
+  }
+}

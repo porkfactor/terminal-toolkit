@@ -10,124 +10,110 @@ include_directories(
 )
 
 add_library(terminal-toolkit SHARED
+  api/c++/Button.h
+  api/c++/Composite.h
+  api/c++/Color.h
+  api/c++/Control.h
   api/c++/Declarations.h
-  api/c++/IComponent.h
-  api/c++/IContainer.h
-  api/c++/IControl.h
-  api/c++/IDialog.h
-  api/c++/IScrollable.h
-  api/c++/containers/GroupBox.h
-  api/c++/controls/Button.h
-  api/c++/controls/Label.h
-  api/c++/controls/Progress.h
-  api/c++/controls/Text.h
-  api/c++/dialogs/FileDialog.h
-  api/c++/dialogs/MessageBox.h
-  api/c++/types/Rectangle.h
-  api/c++/windows/Window.h
-  impl/c++/containers/ContainerImpl.h
-  impl/c++/containers/ContainerImpl.cpp
-  impl/c++/containers/GroupBox.cpp
-  impl/c++/containers/GroupBoxImpl.h
-  impl/c++/containers/GroupBoxImpl.cpp
+  api/c++/Dialog.h
+  api/c++/Display.h
+  api/c++/FileDialog.h
+  api/c++/Group.h
+  api/c++/Label.h
+  api/c++/Layout.h
+  api/c++/MessageBox.h
+  api/c++/Point.h
+  api/c++/Progress.h
+  api/c++/Rectangle.h
+  api/c++/Scrollable.h
+  api/c++/ScrollBar.h
+  api/c++/Shell.h
+  api/c++/Text.h
+  api/c++/Widget.h
+  impl/c++/composites/Composite.cpp
+  impl/c++/composites/Group.cpp
   impl/c++/controls/Button.cpp
-  impl/c++/controls/ButtonImpl.h
-  impl/c++/controls/ButtonImpl.cpp
-  impl/c++/controls/ControlImpl.h
-  impl/c++/controls/ControlImpl.cpp
+  impl/c++/controls/Control.cpp
   impl/c++/controls/Label.cpp
-  impl/c++/controls/LabelImpl.h
-  impl/c++/controls/LabelImpl.cpp
   impl/c++/controls/Progress.cpp
-  impl/c++/controls/ProgressImpl.h
-  impl/c++/controls/ProgressImpl.cpp
+  impl/c++/controls/Scrollable.cpp
+  impl/c++/controls/ScrollBar.cpp
   impl/c++/controls/Text.cpp
-  impl/c++/controls/TextImpl.h
-  impl/c++/controls/TextImpl.cpp
+  impl/c++/controls/Widget.cpp
+  impl/c++/dialogs/Dialog.cpp
   impl/c++/dialogs/FileDialog.cpp
   impl/c++/dialogs/MessageBox.cpp
+  impl/c++/layouts/Layout.cpp
+  impl/c++/system/Display.cpp
+  impl/c++/types/Color.cpp
+  impl/c++/types/Point.cpp
   impl/c++/types/Rectangle.cpp
-  impl/c++/windows/Window.cpp
-  impl/c++/windows/WindowImpl.h
-  impl/c++/windows/WindowImpl.cpp
+  impl/c++/windows/Shell.cpp
   platform/platform.h
 )
 
 source_group("api\\c++" FILES
+  api/c++/Button.h
+  api/c++/Composite.h
+  api/c++/Color.h
+  api/c++/Control.h
   api/c++/Declarations.h
-  api/c++/IComponent.h
-  api/c++/IContainer.h
-  api/c++/IControl.h
-  api/c++/IDialog.h
-  api/c++/IScrollable.h
+  api/c++/Dialog.h
+  api/c++/Display.h
+  api/c++/FileDialog.h
+  api/c++/Group.h
+  api/c++/Label.h
+  api/c++/Layout.h
+  api/c++/MessageBox.h
+  api/c++/Point.h
+  api/c++/Progress.h
+  api/c++/Rectangle.h
+  api/c++/Scrollable.h
+  api/c++/ScrollBar.h
+  api/c++/Shell.h
+  api/c++/Text.h
+  api/c++/Widget.h
 )
 
-source_group("api\\c++\\containers" FILES
-  api/c++/containers/GroupBox.h
-)
-
-source_group("api\\c++\\controls" FILES
-  api/c++/controls/Button.h
-  api/c++/controls/Label.h
-  api/c++/controls/Progress.h
-  api/c++/controls/Text.h
-)
-
-source_group("api\\c++\\dialogs" FILES
-  api/c++/dialogs/FileDialog.h
-  api/c++/dialogs/MessageBox.h
-)
-
-source_group("api\\c++\\types" FILES
-  api/c++/types/Rectangle.h
-)
-
-source_group("api\\c++\\windows" FILES
-  api/c++/windows/Window.h
-)
-
-source_group("containers" FILES
-  impl/c++/containers/ContainerImpl.h
-  impl/c++/containers/ContainerImpl.cpp
-  impl/c++/containers/GroupBox.cpp
-  impl/c++/containers/GroupBoxImpl.h
-  impl/c++/containers/GroupBoxImpl.cpp
+source_group("composites" FILES
+  impl/c++/composites/Composite.cpp
+  impl/c++/composites/Group.cpp
+  impl/c++/composites/Scrollable.cpp
 )
 
 source_group("controls" FILES
   impl/c++/controls/Button.cpp
-  impl/c++/controls/ButtonImpl.h
-  impl/c++/controls/ButtonImpl.cpp
-  impl/c++/controls/ControlImpl.h
-  impl/c++/controls/ControlImpl.cpp
+  impl/c++/controls/Control.cpp
   impl/c++/controls/Label.cpp
-  impl/c++/controls/LabelImpl.h
-  impl/c++/controls/LabelImpl.cpp
   impl/c++/controls/Progress.cpp
-  impl/c++/controls/ProgressImpl.h
-  impl/c++/controls/ProgressImpl.cpp
+  impl/c++/controls/Scrollable.cpp
+  impl/c++/controls/ScrollBar.cpp
   impl/c++/controls/Text.cpp
-  impl/c++/controls/TextImpl.h
-  impl/c++/controls/TextImpl.cpp
+  impl/c++/controls/Widget.cpp
 )
 
 source_group("dialogs" FILES
+  impl/c++/dialogs/Dialog.cpp
   impl/c++/dialogs/FileDialog.cpp
-  impl/c++/dialogs/FileDialogImpl.h
-  impl/c++/dialogs/FileDialogImpl.cpp
   impl/c++/dialogs/MessageBox.cpp
-  impl/c++/dialogs/MessageBoxImpl.h
-  impl/c++/dialogs/MessageBoxImpl.cpp
+)
+
+source_group("layouts" FILES
+  impl/c++/layouts/Layout.cpp
+)
+
+source_group("system" FILES
+  impl/c++/system/Display.cpp
 )
 
 source_group("types" FILES
+  impl/c++/types/Color.cpp
+  impl/c++/types/Point.cpp
   impl/c++/types/Rectangle.cpp
 )
 
 source_group("windows" FILES
-  impl/c++/windows/Window.cpp
-  impl/c++/windows/WindowImpl.h
-  impl/c++/windows/WindowImpl.cpp
+  impl/c++/windows/Shell.cpp
 )
 
 source_group("c\\controls" FILES
