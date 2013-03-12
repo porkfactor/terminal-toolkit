@@ -15,6 +15,8 @@ namespace terminal {
 
       const std::string &getText() const;
       void setText(const std::string &);
+
+      virtual event_ptr handleKey(int key);
       
     protected:
       virtual void paint() const;

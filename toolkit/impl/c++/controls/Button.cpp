@@ -1,6 +1,7 @@
 #include <api/c++/Button.h>
 #include <api/c++/Composite.h>
 #include <api/c++/Rectangle.h>
+#include <curses.h>
 
 namespace terminal {
   namespace toolkit {
@@ -40,6 +41,18 @@ namespace terminal {
     }
 
     void Button::paint() const {
+    }
+
+    event_ptr Button::handleKey(int key) {
+      event_ptr rv(0);
+
+      switch(key) {
+      case KEY_ENTER:
+      case 0x10:
+      case 0x13:
+      }
+
+      return(rv);
     }
   }
 }

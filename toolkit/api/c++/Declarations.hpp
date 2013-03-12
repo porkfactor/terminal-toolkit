@@ -12,6 +12,7 @@ namespace terminal {
   namespace toolkit {
     class Control;
     class Composite;
+    class Event;
     class Layout;
     class Rectangle;
     class Scrollable;
@@ -21,6 +22,7 @@ namespace terminal {
 
     typedef POINTER(Control) control_ptr;
     typedef POINTER(Composite) composite_ptr;
+    typedef POINTER(Event) event_ptr;
     typedef POINTER(Layout) layout_ptr;
     typedef POINTER(ScrollBar) scrollbar_ptr;
     typedef POINTER(Shell) shell_ptr;

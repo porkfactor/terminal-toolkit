@@ -42,6 +42,28 @@ namespace terminal {
       impl_->setText(s);
     }
 
+    event_ptr Text::handleKey(int key) {
+      switch(key) {
+      case KEY_BACKSPACE:
+      case KEY_LEFT:
+      case KEY_RIGHT:
+        /* local edit event */
+        break;
+
+      case KEY_UP:
+      case KEY_DOWN:
+        /* navigation? */
+        break;
+
+      case 0x9:
+      case 0x10:
+      case 0x13:
+      case KEY_ENTER:
+        /* navigation */
+        break;
+      }
+    }
+
     void Text::paint() const {
       WINDOW *window = reinterpret_cast<WINDOW *>(getParent()->window());
     }

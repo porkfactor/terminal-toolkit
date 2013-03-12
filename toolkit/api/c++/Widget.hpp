@@ -13,6 +13,8 @@ namespace terminal {
       virtual void dispose();
       virtual bool isDisposed() const;
 
+      virtual event_ptr handleKey(int key);
+
     protected:
       virtual void checkWidget() const;
 
