@@ -1,6 +1,6 @@
-#include <api/c++/Group.h>
-#include <api/c++/Rectangle.h>
-#include <api/c++/Point.h>
+#include <api/c++/Group.hpp>
+#include <api/c++/Rectangle.hpp>
+#include <api/c++/Point.hpp>
 #include <curses.h>
 
 namespace terminal {
@@ -88,6 +88,9 @@ namespace terminal {
     void Group::paint() const {
       ::box(impl_->window(), 0, 0);
       ::mvwaddstr(impl_->window(), 0, 2, impl_->getText().c_str());
+
+      Composite::paint();
+
       ::touchwin(reinterpret_cast<WINDOW *>(getParent()->window()));
       ::wrefresh(impl_->window());
     }

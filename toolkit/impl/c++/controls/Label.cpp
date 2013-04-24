@@ -1,5 +1,5 @@
-#include <api/c++/Label.h>
-#include <api/c++/Composite.h>
+#include <api/c++/Label.hpp>
+#include <api/c++/Composite.hpp>
 #include <string>
 #include <curses.h>
 

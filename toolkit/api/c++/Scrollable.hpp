@@ -1,8 +1,8 @@
 #ifndef TERMINAL_TOOLKIT_SCROLLABLE_H_
 #define TERMINAL_TOOLKIT_SCROLLABLE_H_
 
-#include <api/c++/Control.h>
-#include <platform/platform.h>
+#include <api/c++/Control.hpp>
+#include <platform/platform.hpp>
 
 namespace terminal {
   namespace toolkit {

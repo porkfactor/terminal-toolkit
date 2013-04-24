@@ -1,7 +1,7 @@
 #ifndef TERMINAL_TOOLKIT_RECTANGLE_H_
 #define TERMINAL_TOOLKIT_RECTANGLE_H_
 
-#include <platform/platform.h>
+#include <platform/platform.hpp>
 #include <stdint.h>
 
 namespace terminal {

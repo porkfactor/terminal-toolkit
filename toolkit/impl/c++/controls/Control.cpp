@@ -1,7 +1,7 @@
-#include <api/c++/Control.h>
-#include <api/c++/Composite.h>
-#include <api/c++/Point.h>
-#include <api/c++/Rectangle.h>
+#include <api/c++/Control.hpp>
+#include <api/c++/Composite.hpp>
+#include <api/c++/Point.hpp>
+#include <api/c++/Rectangle.hpp>
 
 namespace terminal {
   namespace toolkit {
@@ -15,35 +15,7 @@ namespace terminal {
       ~ControlImpl() {
       }
 
-      inline Control::curses_window_t window() const {
-        return(window_);
-      }
-
-      inline void window(Control::curses_window_t w) {
-        window_ = w;
-      }
-
-      inline composite_ptr parent() const {
-        return(parent_);
-      }
-
-      inline const Color &foreground() const {
-        return(foreground_);
-      }
-
-      inline void foreground(const Color &color) {
-        foreground_ = color;
-      }
-      
-      inline const Color &background() const {
-        return(background_);
-      }
-
-      inline void background(const Color &color) {
-        background_ = color;
-      }
-
-    private:
+      Rectangle bounds_;
       Color foreground_;
       Color background_;
       composite_ptr parent_;
@@ -51,8 +23,12 @@ namespace terminal {
     };
 
     Control::Control(composite_ptr parent) :
+      Widget(parent),
       impl_(new ControlImpl(parent))
     {
+      if(parent) {
+        parent->addChild(control_ptr(this));
+      }
     }
 
     Control::~Control() {
@@ -60,19 +36,19 @@ namespace terminal {
     }
 
     Color Control::getForeground() const {
-      return(impl_->foreground());
+      return(impl_->foreground_);
     }
 
     Color Control::getBackground() const {
-      return(impl_->background());
+      return(impl_->background_);
     }
 
     void Control::setForeground(const Color &color) {
-      impl_->foreground(color);
+      impl_->foreground_ = color;
     }
 
     void Control::setBackground(const Color &color) {
-      impl_->background(color);
+      impl_->background_ = color;
     }
 
     void Control::pack(bool changed) {
@@ -123,6 +99,7 @@ namespace terminal {
     }
 
     void Control::setBounds(uint16_t x, uint16_t y, uint16_t width, uint16_t height, bool defer) {
+      impl_->bounds_ = Rectangle(x, y, width, height);
     }
 
     void Control::setBounds(const Rectangle &bounds) {
@@ -130,8 +107,7 @@ namespace terminal {
     }
 
     Rectangle Control::getBounds() const {
-      Rectangle r(0, 0, 0, 0);
-      return(r);
+      return(impl_->bounds_);
     }
 
     Point Control::getLocation() const {
@@ -147,15 +123,15 @@ namespace terminal {
     }
 
     composite_ptr Control::getParent() const {
-      return(impl_->parent());
+      return(impl_->parent_);
     }
 
     shell_ptr Control::getShell() const {
-      return(impl_->parent()->getShell());
+      return(impl_->parent_->getShell());
     }
 
     Control::curses_window_t Control::window() const {
-      return(impl_->window());
+      return(impl_->window_);
     }
   }
 }

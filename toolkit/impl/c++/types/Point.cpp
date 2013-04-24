@@ -1,4 +1,4 @@
-#include <api/c++/Point.h>
+#include <api/c++/Point.hpp>
 
 namespace terminal {
   namespace toolkit {

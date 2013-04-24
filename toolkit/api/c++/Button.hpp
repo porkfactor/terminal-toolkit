@@ -1,8 +1,9 @@
 #ifndef TERMINAL_TOOKIT_BUTTON_H_
 #define TERMINAL_TOOKIT_BUTTON_H_
 
-#include <api/c++/Control.h>
-#include <platform/platform.h>
+#include <api/c++/Control.hpp>
+#include <api/c++/Declarations.hpp>
+#include <platform/platform.hpp>
 #include <string>
 
 namespace terminal {
@@ -15,7 +16,7 @@ namespace terminal {
       const std::string &getText() const;
       void setText(const std::string &text);
 
-      virtual event_ptr handleKey(int key);
+      virtual bool handleKey(int key, Event &event);
 
     protected:
       virtual void paint() const;

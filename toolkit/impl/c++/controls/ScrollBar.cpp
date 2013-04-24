@@ -1,4 +1,4 @@
-#include <api/c++/ScrollBar.h>
+#include <api/c++/ScrollBar.hpp>
 
 namespace terminal {
   namespace toolkit {

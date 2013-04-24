@@ -1,4 +1,4 @@
-#include <api/c++/Rectangle.h>
+#include <api/c++/Rectangle.hpp>
 
 namespace terminal {
   namespace toolkit {

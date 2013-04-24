@@ -1,9 +1,9 @@
 #ifndef TERMINAL_TOOLKIT_LABEL_H_
 #define TERMINAL_TOOLKIT_LABEL_H_
 
-#include <api/c++/Control.h>
-#include <api/c++/Declarations.h>
-#include <platform/platform.h>
+#include <api/c++/Control.hpp>
+#include <api/c++/Declarations.hpp>
+#include <platform/platform.hpp>
 #include <string>
 
 namespace terminal {

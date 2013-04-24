@@ -3,38 +3,50 @@
 #include <locale.h>
 #include <Windows.h>
 #include <conio.h>
+#include <wincon.h>
 
-#include <api/c++/Shell.h>
-#include <api/c++/Group.h>
-#include <api/c++/Text.h>
-#include <api/c++/Label.h>
-#include <api/c++/Button.h>
-#include <api/c++/Display.h>
+#include <api/c++/Shell.hpp>
+#include <api/c++/Group.hpp>
+#include <api/c++/Text.hpp>
+#include <api/c++/Label.hpp>
+#include <api/c++/Button.hpp>
+#include <api/c++/Terminal.hpp>
+#include <api/c++/FileDialog.hpp>
 
 namespace tt = terminal::toolkit;
 
 int main(int argc, char **argv) {
   ::setlocale(LC_ALL, "");
 
-  tt::Display display;
-  tt::Shell shell;
-
+  tt::Terminal terminal;
+  tt::Shell shell(&terminal);
+  tt::FileDialog fd(&shell);
+  
+#if 0
   tt::Group box(&shell);
   tt::Group box2(&box);
-  tt::Text t1(&box);
-  tt::Label l1(&box);
-  tt::Button b1(&box);
+  tt::Text t1(&box2);
+  tt::Text t2(&box2);
+  tt::Label l1(&box2);
+  tt::Button b1(&box2);
 
   box.setText("cocks");
   box2.setText("tits");
+#endif
 
   shell.setSize(80, 24);
-  box.setBounds(0, 0, 80, 24);
-  box2.setBounds(1, 1, 78, 22);
-  shell.redraw();
 
+  fd.open();
 
-  Sleep(3000);
+  /* temp : PD Curses doesn't set sensible console modes in raw raw raw */
+  if(::SetConsoleMode(GetStdHandle(STD_INPUT_HANDLE), ENABLE_WINDOW_INPUT | ENABLE_INSERT_MODE) == 0) {
+    exit(1);
+  }
+
+  //   ::Sleep(3000);
+
+  while(true || !shell.isDisposed())
+    terminal.readAndDispatch();
 
   return(0);
 }

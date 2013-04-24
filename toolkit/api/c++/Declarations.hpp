@@ -18,14 +18,23 @@ namespace terminal {
     class Scrollable;
     class ScrollBar;
     class Shell;
+    class Table;
+    class TableColumn;
+    class TableItem;
+    class Terminal;
     class Widget;
 
     typedef POINTER(Control) control_ptr;
     typedef POINTER(Composite) composite_ptr;
+    typedef POINTER(Terminal) terminal_ptr;
     typedef POINTER(Event) event_ptr;
     typedef POINTER(Layout) layout_ptr;
     typedef POINTER(ScrollBar) scrollbar_ptr;
     typedef POINTER(Shell) shell_ptr;
+    typedef POINTER(Table) table_ptr;
+    typedef POINTER(TableColumn) table_column_ptr;
+    typedef POINTER(TableItem) table_item_ptr;
+    typedef POINTER(Terminal) terminal_ptr;
     typedef POINTER(Widget) widget_ptr;
   }
 }

@@ -1,17 +1,18 @@
 #ifndef TERMINAL_TOOLKIT_CONTROL_H_
 #define TERMINAL_TOOLKIT_CONTROL_H_
 
-#include <api/c++/Declarations.h>
-#include <api/c++/Widget.h>
-#include <api/c++/Point.h>
-#include <api/c++/Color.h>
-#include <platform/platform.h>
+#include <api/c++/Declarations.hpp>
+#include <api/c++/Widget.hpp>
+#include <api/c++/Point.hpp>
+#include <api/c++/Color.hpp>
+#include <platform/platform.hpp>
 #include <stdint.h>
 #include <stdlib.h>
 
 namespace terminal {
   namespace toolkit {
     class DLLEXPORT Control : public Widget {
+      friend class Composite;
     public:
       typedef uintptr_t curses_window_t;
 
@@ -53,9 +54,6 @@ namespace terminal {
       virtual composite_ptr getParent() const;
       virtual shell_ptr getShell() const;
       virtual curses_window_t window() const;
-
-    protected:
-      virtual void paint() const = 0;
 
     private:
       class ControlImpl;

@@ -1,9 +1,9 @@
 #ifndef TERMINAL_TOOKIT_GROUP_H_
 #define TERMINAL_TOOKIT_GROUP_H_
 
-#include <api/c++/Declarations.h>
-#include <api/c++/Composite.h>
-#include <platform/platform.h>
+#include <api/c++/Declarations.hpp>
+#include <api/c++/Composite.hpp>
+#include <platform/platform.hpp>
 #include <string>
 
 namespace terminal {

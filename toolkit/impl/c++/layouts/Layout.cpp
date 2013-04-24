@@ -1,4 +1,4 @@
-#include <api/c++/Layout.h>
+#include <api/c++/Layout.hpp>
 
 namespace terminal {
   namespace toolkit {
@@ -6,6 +6,10 @@ namespace terminal {
     }
 
     Layout::~Layout() {
+    }
+
+    bool Layout::flushCache(control_ptr) {
+      return(true);
     }
   }
 }

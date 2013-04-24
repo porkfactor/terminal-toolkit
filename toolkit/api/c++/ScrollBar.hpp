@@ -1,8 +1,8 @@
 #ifndef TERMINAL_TOOLKIT_SCROLL_BAR_H_
 #define TERMINAL_TOOLKIT_SCROLL_BAR_H_
 
-#include <api/c++/Control.h>
-#include <platform/platform.h>
+#include <api/c++/Control.hpp>
+#include <platform/platform.hpp>
 #include <stdint.h>
 
 namespace terminal {

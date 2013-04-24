@@ -1,4 +1,4 @@
-#include <api/c++/Progress.h>
+#include <api/c++/Progress.hpp>
 
 namespace terminal {
   namespace toolkit {

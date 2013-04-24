@@ -1,9 +1,9 @@
-#include <api/c++/Widget.h>
-#include <api/c++/Declarations.h>
+#include <api/c++/Widget.hpp>
+#include <api/c++/Declarations.hpp>
 
 namespace terminal {
   namespace toolkit {
-    Widget::Widget() {
+    Widget::Widget(widget_ptr parent) {
     }
 
     Widget::~Widget() {
@@ -19,10 +19,8 @@ namespace terminal {
     void Widget::checkWidget() const {
     }
 
-    event_ptr Widget::handleKey(int key) {
-      event_ptr rv(0);
-
-      return(rv);
+    bool Widget::handleKey(int key, Event &event) {
+      return(false);
     }
   }
 }

@@ -1,6 +1,6 @@
-#include <api/c++/Button.h>
-#include <api/c++/Composite.h>
-#include <api/c++/Rectangle.h>
+#include <api/c++/Button.hpp>
+#include <api/c++/Composite.hpp>
+#include <api/c++/Rectangle.hpp>
 #include <curses.h>
 
 namespace terminal {
@@ -43,13 +43,15 @@ namespace terminal {
     void Button::paint() const {
     }
 
-    event_ptr Button::handleKey(int key) {
-      event_ptr rv(0);
+    bool Button::handleKey(int key, Event &event) {
+      bool rv = false;
 
       switch(key) {
       case KEY_ENTER:
-      case 0x10:
-      case 0x13:
+      case '\r':
+      case '\n':
+        rv = true;
+        break;
       }
 
       return(rv);
