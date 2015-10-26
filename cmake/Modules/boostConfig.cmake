@@ -1,7 +1,7 @@
 #----boost_PARAMETERS----#
 set(boost_FOUND TRUE)
-set(boost_INCLUDE_DIR ${BOOST_HOME}/include)
-set(boost_LIB_DIR ${BOOST_HOME}/lib)
+# set(boost_INCLUDE_DIR ${BOOST_HOME}/include)
+# set(boost_LIB_DIR ${BOOST_HOME}/lib)
 
 add_library(boost_date_time STATIC IMPORTED)
 add_library(boost_filesystem STATIC IMPORTED)

@@ -1,8 +1,8 @@
 message(STATUS "SystemVariables found")
 
-SetConfVariable(LIB_HOME LIB_HOME "")
-SetConfVariable(BUS BUS "")
-SetConfVariable(TOOLSET TOOLSET "")
+SetConfVariable(LIB_HOME LIB_HOME "/home/archive")
+SetConfVariable(BUS BUS "64")
+SetConfVariable(TOOLSET TOOLSET "clang")
 SetConfVariable(OUTPUT_BASE OUTPUT_BASE ${CMAKE_BINARY_DIR})
 
 CHECKVAR(LIB_HOME)
