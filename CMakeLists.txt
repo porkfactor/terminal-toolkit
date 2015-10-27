@@ -12,4 +12,3 @@ include(TerminalCommon)
 include(Install)
 
 add_subdirectory(toolkit)
-add_subdirectory(media)

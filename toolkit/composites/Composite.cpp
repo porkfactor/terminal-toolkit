@@ -1,6 +1,6 @@
 #include <terminal/toolkit/Composite.hpp>
 #include <terminal/toolkit/Point.hpp>
-#include <ttcurses.h>
+#include <terminal/toolkit/ttcurses.h>
 #include <vector>
 #include <algorithm>
 

@@ -3,7 +3,7 @@
 #include <terminal/toolkit/Display.hpp>
 #include <terminal/toolkit/Group.hpp>
 #include <terminal/toolkit/Button.hpp>
-#include <ttcurses.h>
+#include <terminal/toolkit/ttcurses.h>
 #include <unistd.h>
 #include <vector>
 #include <algorithm>

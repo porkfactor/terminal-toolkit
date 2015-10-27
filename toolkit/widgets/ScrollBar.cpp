@@ -1,7 +1,7 @@
 #include <terminal/toolkit/ScrollBar.hpp>
 #include <terminal/toolkit/Scrollable.hpp>
 #include <terminal/toolkit/Rectangle.hpp>
-#include <ttcurses.h>
+#include <terminal/toolkit/ttcurses.h>
 
 namespace terminal {
   namespace toolkit {

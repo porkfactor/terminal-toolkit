@@ -2,9 +2,8 @@
 #include <terminal/toolkit/Rectangle.hpp>
 #include <terminal/toolkit/Shell.hpp>
 #include <terminal/toolkit/Event.hpp>
+#include <terminal/toolkit/ttcurses.h>
 #include <sys/select.h>
-
-#include <ttcurses.h>
 
 namespace terminal {
   namespace toolkit {

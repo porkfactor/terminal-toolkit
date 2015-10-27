@@ -4,7 +4,7 @@
 #include <terminal/toolkit/Rectangle.hpp>
 #include <terminal/toolkit/Point.hpp>
 #include <terminal/toolkit/Color.hpp>
-#include <ttcurses.h>
+#include <terminal/toolkit/ttcurses.h>
 
 namespace terminal {
   namespace toolkit {
