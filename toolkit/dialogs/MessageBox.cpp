@@ -4,7 +4,6 @@
 #include <terminal/toolkit/Group.hpp>
 #include <terminal/toolkit/Button.hpp>
 #include <terminal/toolkit/ttcurses.h>
-#include <unistd.h>
 #include <vector>
 #include <algorithm>
 #include <map>
@@ -34,8 +33,8 @@ namespace terminal {
       width = 10;
       height = 5;
 
-      std::wstring::size_type pos = 0;
-      std::wstring::size_type lpos = 0;
+      std::wstring::size_type pos { 0 };
+      std::wstring::size_type lpos { 0 };
 
       while((pos = s.find(L'\n', pos)) != std::wstring::npos) {
         width = std::max(width, static_cast<uint32_t>(pos - lpos));
@@ -80,11 +79,11 @@ namespace terminal {
 
       for(auto i = xxx::instance_.labels_.begin(); i != xxx::instance_.labels_.end(); i++) {
         if(pimpl_->button_ & i->first) {
-          Button *b = new Button(&pimpl_->shell_);
+          std::unique_ptr<Button> b(new Button(&pimpl_->shell_));
 
           b->setText(i->second);
           b->setBounds(1, 1, 5, 1);
-          pimpl_->buttons_.push_back(std::unique_ptr<Button>(b));
+          pimpl_->buttons_.emplace_back(std::move(b));
         }
       }
 
