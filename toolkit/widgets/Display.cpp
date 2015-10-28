@@ -61,11 +61,11 @@ namespace terminal {
     }
 
     bool Display::readAndDispatch() {
-      bool rv = true;
+      bool rv { true };
 
       int key;
-      Shell *shell = getActiveShell();
-      WINDOW *window = reinterpret_cast<WINDOW *>(shell->window());
+      Shell *shell { getActiveShell() };
+      WINDOW *window { reinterpret_cast<WINDOW *>(shell->window()) };
 
       shell->redraw();
 
@@ -74,25 +74,17 @@ namespace terminal {
       ::noecho();
       ::keypad(window, TRUE);
 
-      while(true) {
-        Control *control = nullptr;
-        shell->paint();
+      Control *control { };
+      shell->paint();
 
-        if((control = shell->getFocusControl()) != nullptr) {
-          Event event;
+      if((control = shell->getFocusControl()) != nullptr) {
+        Event event;
 
-          if((key = ::wgetch(window)) != ERR) {
-            event.keyCode = key;
+        if((key = ::wgetch(window)) != ERR) {
+          event.keyCode = key;
 
-            if(control->handleKeyEvent(key, event)) {
+          if(control->handleKeyEvent(key, event)) {
 
-            }
-          }
-
-          // temporary bodge to catch control-c
-          if(key == 0x3) {
-            rv = false;
-            break;
           }
         }
       }

@@ -2,6 +2,7 @@
 #define TERMINAL_TOOLKIT_SELECTIONEVENT_HPP_
 
 #include <terminal/toolkit/TypedEvent.hpp>
+#include <cstdint>
 
 namespace terminal {
   namespace toolkit {

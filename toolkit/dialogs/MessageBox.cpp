@@ -3,6 +3,7 @@
 #include <terminal/toolkit/Display.hpp>
 #include <terminal/toolkit/Group.hpp>
 #include <terminal/toolkit/Button.hpp>
+#include <terminal/toolkit/SelectionListener.hpp>
 #include <terminal/toolkit/ttcurses.h>
 #include <vector>
 #include <algorithm>
@@ -10,6 +11,34 @@
 
 namespace terminal {
   namespace toolkit {
+    class MessageBoxSelectionListener : public SelectionListener {
+    public:
+      MessageBoxSelectionListener() :
+        complete_(false)
+      {
+
+      }
+
+      virtual void handleEvent(Event const &) {
+
+      }
+
+      virtual void widgetDefaultSelected(SelectionEvent const &) {
+
+      }
+
+      virtual void widgetSelected(SelectionEvent const &) {
+        complete_ = true;
+      }
+
+      bool complete() const {
+        return complete_;
+      }
+
+    private:
+      bool complete_;
+    };
+
     struct xxx {
       xxx() {
         labels_[Dialog::MSG_OK] = L"Ok";
@@ -72,6 +101,8 @@ namespace terminal {
       uint32_t width;
       uint32_t height;
 
+      MessageBoxSelectionListener selectionListener;
+
       getPreferredSize(pimpl_->message_, width, height);
 
       pimpl_->shell_.setBounds(0, 0, width, height);
@@ -83,12 +114,18 @@ namespace terminal {
 
           b->setText(i->second);
           b->setBounds(1, 1, 5, 1);
+          b->addSelectionListener(&selectionListener);
           pimpl_->buttons_.emplace_back(std::move(b));
         }
       }
 
       pimpl_->shell_.paint();
-      pimpl_->shell_.getDisplay()->readAndDispatch();
+
+      while(!selectionListener.complete()) {
+        if(!pimpl_->shell_.getDisplay()->readAndDispatch()) {
+          pimpl_->shell_.getDisplay()->sleep();
+        }
+      }
 
       return(0);
     }

@@ -26,6 +26,7 @@ add_library(terminal-toolkit SHARED
   events/HelpEvent.cpp
   events/MenuEvent.cpp
   events/PaintEvent.cpp
+  events/SelectionEvent.cpp
   events/TypedEvent.cpp
   listeners/EventListener.cpp
   widgets/Button.cpp

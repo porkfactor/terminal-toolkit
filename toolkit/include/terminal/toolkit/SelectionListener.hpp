@@ -11,8 +11,8 @@ namespace terminal {
     public:
       virtual inline ~SelectionListener() { };
 
-      virtual void widgetDefaultSelected(SelectionEvent *) = 0;
-      virtual void widgetSelected(SelectionEvent *) = 0;
+      virtual void widgetDefaultSelected(SelectionEvent const &) = 0;
+      virtual void widgetSelected(SelectionEvent const &) = 0;
     };
   }
 }

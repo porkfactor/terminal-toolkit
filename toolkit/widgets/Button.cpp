@@ -2,6 +2,8 @@
 #include <terminal/toolkit/Composite.hpp>
 #include <terminal/toolkit/Point.hpp>
 #include <terminal/toolkit/Rectangle.hpp>
+#include <terminal/toolkit/SelectionListener.hpp>
+#include <terminal/toolkit/SelectionEvent.hpp>
 #include <terminal/toolkit/ttcurses.h>
 
 namespace terminal {
@@ -16,6 +18,7 @@ namespace terminal {
       std::wstring text_;
       bool greyed_;
       bool selection_;
+      std::vector<SelectionListener *> selectionListeners_;
     };
 
     Button::Button(Composite *parent) :
@@ -62,7 +65,7 @@ namespace terminal {
     }
 
     void Button::addSelectionListener(SelectionListener *listener) {
-
+      pimpl_->selectionListeners_.push_back(listener);
     }
 
     void Button::removeSelectionListener(SelectionListener *listener) {
@@ -83,7 +86,9 @@ namespace terminal {
       switch(key) {
       case '\n':
       case ' ':
-
+    	for(auto i : pimpl_->selectionListeners_) {
+    	  i->widgetSelected(SelectionEvent(event));
+    	}
         rv = true;
         break;
       }
