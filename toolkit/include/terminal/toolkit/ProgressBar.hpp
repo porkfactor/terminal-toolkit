@@ -8,14 +8,14 @@ namespace terminal {
   namespace toolkit {
     class ProgressBar : public Control {
     public:
-      enum ProgressBarStyle {
+      typedef enum {
         SMOOTH,
         HORIZONTAL,
         VERTICAL,
         INDETERMINATE
-      };
+      } style_t;
 
-      ProgressBar(Composite *parent, enum ProgressBarStyle);
+      ProgressBar(Composite *parent, style_t = HORIZONTAL);
       virtual ~ProgressBar();
 
       Point computeSize(uint32_t, uint32_t, bool = false) const;
@@ -28,11 +28,12 @@ namespace terminal {
       void setSelection(uint32_t);
 
     protected:
+      virtual bool handleKeyEvent(int, Event const &);
       virtual void paint() const;
 
     private:
-      struct ProgressBarImpl;
-      std::unique_ptr<ProgressBarImpl> pimpl_;
+      struct impl;
+      std::unique_ptr<impl> pimpl_;
     };
   }
 }

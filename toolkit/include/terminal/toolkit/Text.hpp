@@ -51,7 +51,7 @@ namespace terminal {
 
     protected:
       virtual void paint() const;
-      bool handleKeyEvent(int, Event &);
+      bool handleKeyEvent(int, Event const &);
 
     private:
       struct TextImpl;

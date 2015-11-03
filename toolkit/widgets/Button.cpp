@@ -80,7 +80,7 @@ namespace terminal {
       mvwaddwstr(window, r.y(), r.x(), pimpl_->text_.c_str());
     }
 
-    bool Button::handleKeyEvent(int key, Event &event) {
+    bool Button::handleKeyEvent(int key, Event const &event) {
       bool rv = false;
 
       switch(key) {

@@ -31,7 +31,7 @@ namespace terminal {
       void removeSelectionListener(SelectionListener *);
 
     protected:
-      virtual bool handleKeyEvent(int, Event &);
+      virtual bool handleKeyEvent(int, Event const &);
       void paint() const;
 
     private:

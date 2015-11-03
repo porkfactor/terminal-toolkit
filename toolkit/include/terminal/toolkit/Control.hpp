@@ -95,7 +95,7 @@ namespace terminal {
       virtual int color() const;
 
     protected:
-      virtual bool handleKeyEvent(int, Event &) = 0;
+      virtual bool handleKeyEvent(int, Event const &) = 0;
 
     private:
       struct ControlImpl;

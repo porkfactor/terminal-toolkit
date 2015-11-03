@@ -43,7 +43,7 @@ namespace terminal {
       virtual uintptr_t window() const;
 
     protected:
-      virtual bool handleKeyEvent(int, Event &);
+      virtual bool handleKeyEvent(int, Event const &);
 
     private:
       struct ShellImpl;

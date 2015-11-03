@@ -103,7 +103,7 @@ namespace terminal {
 
     }
 
-    bool Shell::handleKeyEvent(int, Event &) {
+    bool Shell::handleKeyEvent(int, Event const &) {
       return(false);
     }
 

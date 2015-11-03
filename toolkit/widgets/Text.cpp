@@ -107,9 +107,11 @@ namespace terminal {
       for(uint32_t i = pimpl_->text_.length(); i < r.width(); i++) {
         mvwaddch(w, r.y(), r.x() + i, ' ');
       }
+
+      wmove(w, r.y() + pimpl_->caret_position_.y(), r.x() + pimpl_->caret_position_.x());
     }
 
-    bool Text::handleKeyEvent(int key, Event &event) {
+    bool Text::handleKeyEvent(int key, Event const &event) {
       switch(key) {
       case 0x8:
       case KEY_BACKSPACE:

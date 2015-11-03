@@ -40,6 +40,7 @@ add_library(terminal-toolkit SHARED
   widgets/Menu.cpp
   widgets/MenuItem.cpp
   widgets/Point.cpp
+  widgets/ProgressBar.cpp
   widgets/Rectangle.cpp
   widgets/Scrollable.cpp
   widgets/ScrollBar.cpp

@@ -1,12 +1,12 @@
 #include <terminal/toolkit/ProgressBar.hpp>
 #include <terminal/toolkit/Point.hpp>
 #include <terminal/toolkit/Rectangle.hpp>
-#include <ttcurses.h>
+#include <terminal/toolkit/ttcurses.h>
 
 namespace terminal {
   namespace toolkit {
-    struct ProgressBar::ProgressBarImpl {
-      ProgressBarImpl() :
+    struct ProgressBar::impl {
+      impl() :
         minimum_(0),
         maximum_(0),
         position_(0)
@@ -19,20 +19,30 @@ namespace terminal {
       uint32_t position_;
     };
 
+    ProgressBar::ProgressBar(Composite *parent, style_t style) :
+      Control(parent),
+      pimpl_(new impl())
+    {
+    }
+
+    ProgressBar::~ProgressBar() {
+
+    }
+
     Point ProgressBar::computeSize(uint32_t, uint32_t, bool) const {
       return(Point(0, 0));
     }
 
     uint32_t ProgressBar::getMaximum() const {
-      return(pimpl_->maximum_);
+      return pimpl_->maximum_;
     }
 
     uint32_t ProgressBar::getMinimum() const {
-      return(pimpl_->minimum_);
+      return pimpl_->minimum_;
     }
 
     uint32_t ProgressBar::getSelection() const {
-      return(pimpl_->position_);
+      return pimpl_->position_;
     }
 
     void ProgressBar::setMinimum(uint32_t minimum) {
@@ -47,14 +57,21 @@ namespace terminal {
       pimpl_->position_ = selection;
     }
 
-    void ProgressBar::paint() const {
-      WINDOW *w = reinterpret_cast<WINDOW *>(window());
-      Rectangle r(getBounds());
+    bool ProgressBar::handleKeyEvent(int, Event const &) {
+      return false;
+    }
 
-      uint32_t index = (pimpl_->maximum_ - pimpl_->minimum_) / pimpl_->position_;
+    void ProgressBar::paint() const {
+      WINDOW *w { reinterpret_cast<WINDOW *>(window()) };
+      Rectangle r { getBounds() };
+
+      uint32_t range { pimpl_->maximum_ - pimpl_->minimum_ };
+      uint32_t position { pimpl_->position_ - pimpl_->minimum_ };
+      double percent { static_cast<double>(position) / static_cast<double>(range) };
+      uint32_t index { static_cast<uint32_t>(r.width() * percent) };
 
       // TODO: how to reverse?
-      wattrset(w, color());
+      wattrset(w, A_REVERSE | color());
 
       for(uint32_t i = 0; i < index; i++) {
         mvwaddch(w, r.y(), r.x() + i, ' ');
