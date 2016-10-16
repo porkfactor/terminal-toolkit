@@ -11,7 +11,7 @@ namespace terminal {
       {
       }
 
-      std::wstring text_;
+      string text_;
       Menu *parent_;
       Menu *menu_;
       bool enabled_;
@@ -47,7 +47,7 @@ namespace terminal {
       pimpl_->menu_ = menu;
     }
 
-    void MenuItem::setText(const std::wstring &) {
+    void MenuItem::setText(string const &) {
 
     }
   }

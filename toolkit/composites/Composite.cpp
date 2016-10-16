@@ -6,18 +6,14 @@
 
 namespace terminal {
   namespace toolkit {
-    struct Composite::CompositeImpl {
-      CompositeImpl() {
-
-      }
-
+    struct Composite::impl {
       std::vector<Control *> children_;
       std::vector<Control *> tab_list_;
     };
 
     Composite::Composite(Composite *parent) :
       Scrollable(parent),
-      pimpl_(new CompositeImpl())
+      pimpl_(new impl())
     {
 
     }

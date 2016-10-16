@@ -1,7 +1,7 @@
 #ifndef TERMINAL_TOOLKIT_ITEM_HPP_
 #define TERMINAL_TOOLKIT_ITEM_HPP_
 
-#include <terminal/toolkit/Widget.hpp>
+#include "Widget.hpp"
 
 namespace terminal {
   namespace toolkit {
@@ -10,12 +10,12 @@ namespace terminal {
       Item(Widget *);
       virtual ~Item();
 
-      virtual const std::wstring &getText() const;
-      virtual void setText(const std::wstring &);
+      virtual const string &getText() const;
+      virtual void setText(const string &);
 
     private:
-      struct ItemImpl;
-      std::unique_ptr<struct ItemImpl> pimpl_;
+      struct impl;
+      impl *pimpl_;
     };
   }
 }

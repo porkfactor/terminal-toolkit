@@ -28,7 +28,7 @@ namespace terminal {
       double rotation;
       int start;
       int stateMask;
-      std::wstring text;
+      string text;
       int time;
       int type;
       Widget *widget;

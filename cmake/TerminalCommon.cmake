@@ -1,4 +1,4 @@
-message(STATUS "TelesoftCommon")
+message(STATUS "TerminalCommon")
 
 set(configFound)
 

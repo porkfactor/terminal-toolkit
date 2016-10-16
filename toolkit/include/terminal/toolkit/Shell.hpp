@@ -46,8 +46,8 @@ namespace terminal {
       virtual bool handleKeyEvent(int, Event const &);
 
     private:
-      struct ShellImpl;
-      std::unique_ptr<ShellImpl> pimpl_;
+      struct impl;
+      impl *pimpl_;
     };
   }
 }

@@ -14,7 +14,7 @@ namespace terminal {
       }
 
       Control::alignment_t alignment_;
-      std::wstring text_;
+      string text_;
       const Image *image_;
     };
 
@@ -37,7 +37,7 @@ namespace terminal {
       return(pimpl_->image_);
     }
 
-    const std::wstring &Label::getText() const {
+    string const &Label::getText() const {
       return(pimpl_->text_);
     }
 
@@ -49,7 +49,7 @@ namespace terminal {
       pimpl_->image_ = image;
     }
 
-    void Label::setText(const std::wstring &text) {
+    void Label::setText(string const &text) {
       pimpl_->text_ = text;
     }
 

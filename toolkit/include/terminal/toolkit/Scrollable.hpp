@@ -3,21 +3,24 @@
 
 #include <terminal/toolkit/Control.hpp>
 
-namespace terminal {
-  namespace toolkit {
-    class ScrollBar;
+namespace terminal
+{
+    namespace toolkit
+    {
+        class ScrollBar;
 
-    class Scrollable : public Control {
-    public:
-      Scrollable(Composite *);
-      virtual ~Scrollable();
+        class Scrollable: public Control
+        {
+        public:
+            Scrollable(Composite *);
+            virtual ~Scrollable();
 
-      Rectangle computeTrim(uint32_t, uint32_t, uint32_t, uint32_t);
-      Rectangle getClientArea() const;
-      ScrollBar *getHorizontalBar() const;
-      ScrollBar *getVerticalBar() const;
-    };
-  }
+            Rectangle computeTrim(uint32_t, uint32_t, uint32_t, uint32_t);
+            Rectangle getClientArea() const;
+            ScrollBar *getHorizontalBar() const;
+            ScrollBar *getVerticalBar() const;
+        };
+    }
 }
 
 #endif

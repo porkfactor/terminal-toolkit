@@ -3,19 +3,22 @@
 
 #include <terminal/toolkit/EventListener.hpp>
 
-namespace terminal {
-  namespace toolkit {
-    class KeyEvent;
+namespace terminal
+{
+    namespace toolkit
+    {
+        class KeyEvent;
 
-    class KeyListener : public EventListener {
-    public:
-      void keyPressed(const KeyEvent &) = 0;
-      void keyReleased(const KeyEvent &) = 0;
-      void keyTyped(const KeyEvent &) = 0;
+        class KeyListener: public EventListener
+        {
+        public:
+            virtual void keyPressed(const KeyEvent &) = 0;
+            virtual void keyReleased(const KeyEvent &) = 0;
+            virtual void keyTyped(const KeyEvent &) = 0;
 
-    private:
-    };
-  }
+        private:
+        };
+    }
 }
 
 #endif

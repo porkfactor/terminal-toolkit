@@ -2,18 +2,18 @@
 
 namespace terminal {
   namespace toolkit {
-    struct Dialog::DialogImpl {
-      DialogImpl(Shell *parent) :
+    struct Dialog::impl {
+      impl(Shell *parent) :
         parent_(parent)
       {
       }
 
-      std::wstring text_;
+      string text_;
       Shell *parent_;
     };
 
     Dialog::Dialog(Shell *parent) :
-      pimpl_(new DialogImpl(parent))
+      pimpl_(new impl(parent))
     {
 
     }
@@ -26,11 +26,11 @@ namespace terminal {
       return(pimpl_->parent_);
     }
 
-    const std::wstring &Dialog::getText() const {
+    string const &Dialog::getText() const {
       return(pimpl_->text_);
     }
 
-    void Dialog::setText(const std::wstring &text) {
+    void Dialog::setText(string const &text) {
       pimpl_->text_ = text;
     }
   }

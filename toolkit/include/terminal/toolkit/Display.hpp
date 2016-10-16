@@ -36,8 +36,8 @@ namespace terminal {
       void release();
 
     private:
-      struct DisplayImpl;
-      std::unique_ptr<DisplayImpl> pimpl_;
+      struct impl;
+      impl *pimpl_;
     };
   }
 }

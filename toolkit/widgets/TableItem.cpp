@@ -9,11 +9,11 @@ namespace terminal {
     struct Cell {
       Color foreground_;
       Color background_;
-      std::wstring text_;
+      string text_;
     };
 
-    struct TableItem::TableItemImpl {
-      TableItemImpl() :
+    struct TableItem::impl {
+        impl() :
         parent_(nullptr)
       {
 
@@ -25,7 +25,7 @@ namespace terminal {
 
     TableItem::TableItem(Table *parent) :
       Item(parent),
-      pimpl_(new TableItemImpl())
+      pimpl_(new impl())
     {
     }
 
@@ -77,19 +77,19 @@ namespace terminal {
       return(Rectangle(0, 0, 0, 0));
     }
 
-    const std::wstring &TableItem::getText() const {
+    string const &TableItem::getText() const {
       return(getText(0));
     }
 
-    const std::wstring &TableItem::getText(Control::index_t index) const {
+    string const &TableItem::getText(Control::index_t index) const {
       return(pimpl_->data_[index]->text_);
     }
 
-    void TableItem::setText(const std::wstring &text) {
+    void TableItem::setText(string const &text) {
       setText(0, text);
     }
 
-    void TableItem::setText(Control::index_t index, const std::wstring &text) {
+    void TableItem::setText(Control::index_t index, string const &text) {
       pimpl_->data_[index]->text_= text;
     }
   }

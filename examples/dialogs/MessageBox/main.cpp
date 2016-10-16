@@ -4,14 +4,14 @@
 
 namespace tt = terminal::toolkit;
 
-static void message_box_ok(tt::Display const &d, std::wstring const &s) {
+static void message_box_ok(tt::Display const &d, tt::string const &s) {
   tt::MessageBox mb(d.getActiveShell(), tt::Dialog::MSG_OK);
 
   mb.setMessage(s);
   mb.open();
 }
 
-static void message_box_ok_cancel(tt::Display const &d, std::wstring const &s) {
+static void message_box_ok_cancel(tt::Display const &d, tt::string const &s) {
   tt::MessageBox mb(d.getActiveShell(), tt::Dialog::MSG_OK | tt::Dialog::MSG_CANCEL);
 
   mb.setMessage(s);

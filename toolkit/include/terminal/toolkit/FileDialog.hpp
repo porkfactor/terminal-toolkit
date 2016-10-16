@@ -4,38 +4,41 @@
 #include <terminal/toolkit/Dialog.hpp>
 #include <vector>
 
-namespace terminal {
-  namespace toolkit {
-    class FileDialog : public Dialog {
-    public:
-      typedef enum {
-        OPEN,
-        SAVE,
-        MULTI
-      } style_t;
+namespace terminal
+{
+    namespace toolkit
+    {
+        class FileDialog: public Dialog
+        {
+        public:
+            typedef enum
+            {
+                OPEN,
+                SAVE,
+                MULTI
+            } style_t;
 
-      FileDialog(Shell *, style_t style = OPEN);
-      virtual ~FileDialog();
+            FileDialog(Shell *, style_t style = OPEN);
+            virtual ~FileDialog();
 
-      const std::wstring &getFileName() const;
-      const std::vector<std::wstring> &getFileNames() const;
-      const std::vector<std::wstring> &getFilterExtensions() const;
-      const std::vector<std::wstring> &getFilterNames() const;
-      const std::wstring &getFilterPath() const;
+            string const &getFileName() const;
+            std::vector<string> const &getFileNames() const;
+            std::vector<string> const &getFilterExtensions() const;
+            std::vector<string> const &getFilterNames() const;
+            string const &getFilterPath() const;
 
+            void setFileName(string const &);
+            void setFilterExtenstions(string const &);
+            void setFilterIndex(uint32_t);
+            void setFilterNames(string const &);
+            void setFilterPath(string const &);
+            void setOverwrite(bool);
 
-      void setFileName(const std::wstring &);
-      void setFilterExtenstions(const std::wstring &);
-      void setFilterIndex(uint32_t);
-      void setFilterNames(const std::wstring &);
-      void setFilterPath(const std::wstring &);
-      void setOverwrite(bool);
-
-    private:
-      struct FileDialogImpl;
-      std::unique_ptr<struct FileDialogImpl> pimpl_;
-    };
-  }
+        private:
+            struct impl;
+            impl *pimpl_;
+        };
+    }
 }
 
 #endif

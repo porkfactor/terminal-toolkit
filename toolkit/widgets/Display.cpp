@@ -10,8 +10,8 @@ namespace terminal {
     static Display *current_ = 0;
     static Display *default_ = 0;
 
-    struct Display::DisplayImpl {
-      DisplayImpl() :
+    struct Display::impl {
+        impl() :
         active_(nullptr)
       {
 
@@ -21,7 +21,7 @@ namespace terminal {
     };
 
     Display::Display() :
-      pimpl_(new DisplayImpl())
+      pimpl_(new impl())
     {
       ::initscr();
       ::start_color();

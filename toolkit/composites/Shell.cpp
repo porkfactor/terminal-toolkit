@@ -6,8 +6,8 @@
 
 namespace terminal {
   namespace toolkit {
-    struct Shell::ShellImpl {
-      ShellImpl(Shell *parent, Display *display, Shell::style_t style) :
+    struct Shell::impl {
+      impl(Shell *parent, Display *display, Shell::style_t style) :
         display_(display),
         parent_(parent),
         style_(style),
@@ -20,7 +20,7 @@ namespace terminal {
         }
       }
 
-      ~ShellImpl() {
+      ~impl() {
         ::delwin(window_);
       }
 
@@ -32,13 +32,13 @@ namespace terminal {
 
     Shell::Shell(Display *display, Shell::style_t style) :
       Composite(nullptr),
-      pimpl_(new ShellImpl(nullptr, display, style))
+      pimpl_(new impl(nullptr, display, style))
     {
     }
 
     Shell::Shell(Shell *parent, Shell::style_t style) :
       Composite(parent),
-      pimpl_(new ShellImpl(parent, Display::getDefault(), style))
+      pimpl_(new impl(parent, Display::getDefault(), style))
     {
 
     }

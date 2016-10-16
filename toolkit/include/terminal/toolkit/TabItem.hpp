@@ -4,33 +4,36 @@
 #include <terminal/toolkit/Item.hpp>
 #include <string>
 
-namespace terminal {
-  namespace toolkit {
-    class Control;
-    class Image;
-    class Item;
-    class Rectangle;
-    class TabFolder;
+namespace terminal
+{
+    namespace toolkit
+    {
+        class Control;
+        class Image;
+        class Item;
+        class Rectangle;
+        class TabFolder;
 
-    class TabItem : public Item {
-    public:
-      TabItem(TabFolder *);
-      virtual ~TabItem();
+        class TabItem: public Item
+        {
+        public:
+            TabItem(TabFolder *);
+            virtual ~TabItem();
 
-      Rectangle getBounds() const;
-      Control *getControl() const;
-      TabFolder *getParent() const;
-      const std::wstring &getToolTipText() const;
-      void setControl(Control *control);
-      void setImage(Image *image);
-      void setText(const std::wstring &string);
-      void setToolTipText(const std::wstring &string);
+            Rectangle getBounds() const;
+            Control *getControl() const;
+            TabFolder *getParent() const;
+            string const &getToolTipText() const;
+            void setControl(Control *control);
+            void setImage(Image *image);
+            void setText(string const &string);
+            void setToolTipText(string const &string);
 
-    private:
-      struct impl;
-      std::unique_ptr<impl> pimpl_;
-    };
-  }
+        private:
+            struct impl;
+            impl *pimpl_;
+        };
+    }
 }
 
 #endif

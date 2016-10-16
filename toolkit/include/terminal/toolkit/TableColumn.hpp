@@ -3,27 +3,30 @@
 
 #include <terminal/toolkit/Item.hpp>
 
-namespace terminal {
-  namespace toolkit {
-    class Table;
+namespace terminal
+{
+    namespace toolkit
+    {
+        class Table;
 
-    class TableColumn : public Item {
-    public:
-      TableColumn(Table *);
-      virtual ~TableColumn();
+        class TableColumn: public Item
+        {
+        public:
+            TableColumn(Table *);
+            virtual ~TableColumn();
 
-      Table *getParent() const;
+            Table *getParent() const;
 
-      virtual uint32_t getWidth() const;
+            virtual uint32_t getWidth() const;
 
-      virtual void setText(const std::wstring &);
-      virtual void setWidth(uint32_t);
+            virtual void setText(string const &);
+            virtual void setWidth(uint32_t);
 
-    private:
-      struct TableColumnImpl;
-      std::unique_ptr<TableColumnImpl> pimpl_;
-    };
-  }
+        private:
+            struct impl;
+            impl *pimpl_;
+        };
+    }
 }
 
 #endif
