@@ -16,6 +16,7 @@ namespace terminal
         class FocusListener;
         class HelpListener;
         class KeyListener;
+        class Key;
 
         class Control: public Widget
         {
@@ -102,7 +103,7 @@ namespace terminal
             virtual int color() const;
 
         protected:
-            virtual bool handleKeyEvent(int, Event const &) = 0;
+            virtual bool handleKey(Key const &) = 0;
 
         private:
             struct impl;

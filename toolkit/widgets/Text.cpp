@@ -1,6 +1,7 @@
 #include <terminal/toolkit/Text.hpp>
 #include <terminal/toolkit/Point.hpp>
 #include <terminal/toolkit/Rectangle.hpp>
+#include <terminal/toolkit/Keys.hpp>
 #include <terminal/toolkit/ttcurses.h>
 
 namespace terminal
@@ -10,7 +11,8 @@ namespace terminal
         struct Text::impl
         {
             impl() :
-                    caret_position_(0, 0), text_limit_(10)
+                caret_position_(0, 0),
+                text_limit_(10)
             {
             }
 
@@ -134,51 +136,47 @@ namespace terminal
             wmove(w, r.y() + pimpl_->caret_position_.y(), r.x() + pimpl_->caret_position_.x());
         }
 
-        bool Text::handleKeyEvent(int key, Event const &event)
+        bool Text::handleKey(Key const &key)
         {
-            switch(key)
+            switch(key.vk())
             {
-            case 0x8:
-            case KEY_BACKSPACE:
+            case Key::BACKSPACE:
                 if(pimpl_->caret_position_.x() > 0)
                 {
                     pimpl_->caret_position_ = Point(pimpl_->caret_position_.x() - 1, pimpl_->caret_position_.y());
                     pimpl_->text_.erase(pimpl_->caret_position_.x(), 1);
-                    // paint();
                 }
                 break;
 
-            case KEY_DC:
+            case Key::DOWN:
                 if(pimpl_->caret_position_.x() < pimpl_->text_.length())
                 {
                     pimpl_->text_.erase(pimpl_->caret_position_.x(), 1);
-                    // paint();
                 }
                 break;
 
-            case KEY_LEFT:
+            case Key::LEFT:
                 if(pimpl_->caret_position_.x() > 0)
                 {
                     pimpl_->caret_position_ = Point(pimpl_->caret_position_.x() - 1, pimpl_->caret_position_.y());
-                    // paint();
                 }
                 break;
 
-            case KEY_RIGHT:
+            case Key::RIGHT:
+                if(pimpl_->caret_position_.x() < this->getBounds().width())
+                {
+                    pimpl_->caret_position_ = Point(pimpl_->caret_position_.x() + 1, pimpl_->caret_position_.y());
+                }
                 break;
 
-            case 0x9:
-            case 0xa:
-            case 0xd:
-            case KEY_ENTER:
+            case Key::ENTER:
                 break;
 
             default:
                 if(pimpl_->text_.length() < pimpl_->text_limit_)
                 {
-                    pimpl_->text_.insert(pimpl_->text_.begin() + pimpl_->caret_position_.x(), static_cast<char>(key));
+                    pimpl_->text_.insert(pimpl_->text_.begin() + pimpl_->caret_position_.x(), static_cast<string::value_type>(key.code()));
                     pimpl_->caret_position_ = Point(pimpl_->caret_position_.x() + 1, pimpl_->caret_position_.y());
-                    // paint();
                 }
                 break;
             }

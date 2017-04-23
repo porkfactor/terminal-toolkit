@@ -16,6 +16,9 @@ namespace terminal
         class Widget
         {
         public:
+            typedef std::size_t size_type;
+            typedef int event_type;
+
             Widget(Widget *parent);
             virtual ~Widget();
 
@@ -24,9 +27,29 @@ namespace terminal
             virtual bool isDisposed() const;
             virtual bool isListening(int event) const;
 
-            virtual void addListener(int event, Listener *);
-            virtual void notifyListeners(int event, Event const &) const;
-            virtual void removeListener(int event, Listener *);
+            /**
+             * @brief Add an event listener
+             *
+             * @param eventType
+             * @param listener
+             */
+            virtual void addListener(event_type eventType, Listener *listener);
+
+            /**
+             * @brief Notify listeners
+             *
+             * @param eventType
+             * @param event
+             */
+            virtual void notifyListeners(event_type eventType, Event const &event) const;
+
+            /**
+             * @brief Remove an event listener
+             *
+             * @param eventType
+             * @param listener
+             */
+            virtual void removeListener(event_type eventType, Listener *listener);
 
             virtual void paint() const = 0;
 

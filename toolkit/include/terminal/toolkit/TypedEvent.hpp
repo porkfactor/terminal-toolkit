@@ -1,20 +1,26 @@
 #ifndef TERMINAL_TOOLKIT_TYPEDEVENT_HPP_
 #define TERMINAL_TOOLKIT_TYPEDEVENT_HPP_
 
-namespace terminal {
-  namespace toolkit {
-    class Display;
-    class Event;
-    class Widget;
+#include "Event.hpp"
 
-    class TypedEvent {
-    public:
-      TypedEvent(const Event &e);
+namespace terminal
+{
+    namespace toolkit
+    {
+        class TypedEvent
+        {
+        public:
+            TypedEvent(Event const &e) :
+                display_(e.display),
+                widget_(e.widget)
+            {
 
-      Display *display;
-      Widget *widget;
-    };
-  }
+            }
+
+            Display *display_;
+            Widget *widget_;
+        };
+    }
 }
 
 #endif

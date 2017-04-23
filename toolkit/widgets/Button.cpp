@@ -2,6 +2,7 @@
 #include <terminal/toolkit/Composite.hpp>
 #include <terminal/toolkit/Point.hpp>
 #include <terminal/toolkit/Rectangle.hpp>
+#include <terminal/toolkit/KeyEvent.hpp>
 #include <terminal/toolkit/SelectionListener.hpp>
 #include <terminal/toolkit/SelectionEvent.hpp>
 #include <terminal/toolkit/ttcurses.h>
@@ -94,19 +95,21 @@ namespace terminal
             mvwaddwstr(window, r.y(), r.x(), pimpl_->text_.c_str());
         }
 
-        bool Button::handleKeyEvent(int key, Event const &event)
+        bool Button::handleKey(Key const &key)
         {
             bool rv = false;
 
-            switch(key)
+            switch(key.vk())
             {
-            case '\n':
-            case ' ':
+            case Key::ENTER:
                 for(auto i : pimpl_->selectionListeners_)
                 {
-                    i->widgetSelected(SelectionEvent(event));
+                    i->widgetSelected(SelectionEvent(Event()));
                 }
                 rv = true;
+                break;
+
+            default:
                 break;
             }
 

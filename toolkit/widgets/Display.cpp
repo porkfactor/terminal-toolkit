@@ -2,127 +2,149 @@
 #include <terminal/toolkit/Rectangle.hpp>
 #include <terminal/toolkit/Shell.hpp>
 #include <terminal/toolkit/Event.hpp>
+#include <terminal/toolkit/KeyEvent.hpp>
 #include <terminal/toolkit/ttcurses.h>
 #include <sys/select.h>
 
-namespace terminal {
-  namespace toolkit {
-    static Display *current_ = 0;
-    static Display *default_ = 0;
+#include <map>
 
-    struct Display::impl {
-        impl() :
-        active_(nullptr)
-      {
-
-      }
-
-      Shell *active_;
-    };
-
-    Display::Display() :
-      pimpl_(new impl())
+namespace terminal
+{
+    namespace toolkit
     {
-      ::initscr();
-      ::start_color();
+        static Display *current_ = 0;
+        static Display *default_ = 0;
 
-      for(uint16_t f = 0; f < COLORS; f++) {
-        for(uint16_t b = 0; b < COLORS; b++) {
-          ::init_pair((f * COLORS) + b, f, b);
+        struct Display::impl
+        {
+            impl() :
+                active_(nullptr)
+            {
+
+            }
+
+            Shell *active_;
+        };
+
+        Display::Display() :
+            pimpl_(new impl())
+        {
+            ::initscr();
+            ::start_color();
+
+            for(uint16_t f = 0; f < COLORS; f++)
+            {
+                for(uint16_t b = 0; b < COLORS; b++)
+                {
+                    ::init_pair((f * COLORS) + b, f, b);
+                }
+            }
         }
-      }
-    }
 
-    Display::~Display() {
-      ::endwin();
-    }
-
-    bool Display::sleep() {
-      bool rv = false;
-      int fd = ::fileno(stdin);
-      struct timeval tv = { 0, 0, };
-      fd_set rfd;
-
-      FD_ZERO(&rfd);
-      FD_SET(fd, &rfd);
-
-      switch(::select(fd + 1, &rfd, 0, 0, &tv)) {
-      case -1:
-        rv = false;
-        break;
-
-      default:
-        if(FD_ISSET(fd, &rfd)) {
-          rv = true;
+        Display::~Display()
+        {
+            ::endwin();
         }
-      }
 
-      return(rv);
-    }
+        bool Display::sleep()
+        {
+            bool rv = false;
+            int fd = ::fileno(stdin);
+            struct timeval tv { 0, 0, };
+            fd_set rfd;
 
-    bool Display::readAndDispatch() {
-      bool rv { true };
+            FD_ZERO(&rfd);
+            FD_SET(fd, &rfd);
 
-      int key;
-      Shell *shell { getActiveShell() };
-      WINDOW *window { reinterpret_cast<WINDOW *>(shell->window()) };
+            switch(::select(fd + 1, &rfd, 0, 0, &tv))
+            {
+            case -1:
+                rv = false;
+                break;
 
-      shell->redraw();
+            default:
+                if(FD_ISSET(fd, &rfd))
+                {
+                    rv = true;
+                }
+            }
 
-      ::timeout(-1);
-      ::raw();
-      ::noecho();
-      ::keypad(window, TRUE);
-
-      Control *control { };
-      shell->paint();
-
-      if((control = shell->getFocusControl()) != nullptr) {
-        Event event;
-
-        if((key = ::wgetch(window)) != ERR) {
-          event.keyCode = key;
-
-          if(control->handleKeyEvent(key, event)) {
-
-          }
+            return rv;
         }
-      }
 
-      return(rv);
-    }
+        bool Display::readAndDispatch()
+        {
+            bool rv { true };
 
-    Rectangle Display::getBounds() const {
-      return(Rectangle(0, 0, 0, 0));
-    }
+            int key;
+            Shell *shell { getActiveShell() };
+            WINDOW *window
+            {
+                reinterpret_cast<WINDOW *>(shell->window()) };
 
-    Rectangle Display::getClientArea() const {
-      return(Rectangle(0, 0, 0, 0));
-    }
+            shell->redraw();
 
-    Shell *Display::getActiveShell() const {
-      return(pimpl_->active_);
-    }
+            ::timeout(-1);
+            ::raw();
+            ::noecho();
+            ::keypad(window, TRUE);
 
-    void Display::setActiveShell(Shell *active) {
-      pimpl_->active_ = active;
-    }
+            Control *control {};
+            shell->paint();
 
-    Control *Display::getFocusControl() const {
-      return(getActiveShell()->getFocusControl());
-    }
+            if((control = shell->getFocusControl()) != nullptr)
+            {
+                if((key = ::wgetch(window)) != ERR)
+                {
+                    if(control->handleKey(Key { key }))
+                    {
 
-    void Display::beep() const {
-      ::beep();
-    }
+                    }
+                }
+            }
 
-    Display *Display::getCurrent() {
-      return(current_);
-    }
+            return rv;
+        }
 
-    Display *Display::getDefault() {
-      return(default_ ? default_ : (default_ = new Display()));
+        Rectangle Display::getBounds() const
+        {
+            return Rectangle(0, 0, 0, 0);
+        }
+
+        Rectangle Display::getClientArea() const
+        {
+            return Rectangle(0, 0, 0, 0);
+        }
+
+        Shell *Display::getActiveShell() const
+        {
+            return pimpl_->active_;
+        }
+
+        void Display::setActiveShell(Shell *active)
+        {
+            pimpl_->active_ = active;
+        }
+
+        Control *Display::getFocusControl() const
+        {
+            return getActiveShell()->getFocusControl();
+        }
+
+        void Display::beep() const
+        {
+            ::beep();
+        }
+
+        Display *Display::getCurrent()
+        {
+            return current_;
+        }
+
+        Display *Display::getDefault()
+        {
+            return default_ ? default_ : (default_ = new Display());
+        }
     }
-  }
 }
 

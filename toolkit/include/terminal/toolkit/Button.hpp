@@ -15,7 +15,7 @@ namespace terminal
             Button(Composite *parent);
             virtual ~Button();
 
-            virtual Point computeSize(uint32_t, uint32_t, bool) const;
+            virtual Point computeSize(uint32_t, uint32_t, bool) const override;
 
             Control::alignment_t getAlignment() const;
             virtual bool getGreyed() const;
@@ -24,7 +24,7 @@ namespace terminal
             virtual void setGreyed(bool);
             virtual void setSelection(bool);
             void setAlignment(Control::alignment_t);
-            virtual bool setFocus();
+            virtual bool setFocus() override;
 
             virtual const string &getText() const;
             virtual void setText(string const &);
@@ -33,8 +33,8 @@ namespace terminal
             void removeSelectionListener(SelectionListener *);
 
         protected:
-            virtual bool handleKeyEvent(int, Event const &);
-            void paint() const;
+            virtual bool handleKey(Key const &) override;
+            void paint() const override;
 
         private:
             struct impl;

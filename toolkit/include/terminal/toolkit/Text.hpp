@@ -41,7 +41,7 @@ namespace terminal
             Point getSelection() const;
             uint32_t getSelectionCount() const;
             string getSelectionText() const;
-            void setSelection(uint32_t, uint32_t = -1);
+            void setSelection(uint32_t, uint32_t = ~0U);
             void setSelection(Point const &);
 
             /* listeners */
@@ -53,8 +53,8 @@ namespace terminal
             void removeVerifyListener(VerifyListener *);
 
         protected:
-            virtual void paint() const;
-            bool handleKeyEvent(int, Event const &);
+            virtual void paint() const override;
+            bool handleKey(Key const &) override;
 
         private:
             struct impl;

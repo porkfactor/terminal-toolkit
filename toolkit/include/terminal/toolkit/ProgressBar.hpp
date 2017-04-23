@@ -18,7 +18,7 @@ namespace terminal {
       ProgressBar(Composite *parent, style_t = HORIZONTAL);
       virtual ~ProgressBar();
 
-      Point computeSize(uint32_t, uint32_t, bool = false) const;
+      Point computeSize(uint32_t, uint32_t, bool = false) const override;
       uint32_t getMaximum() const;
       uint32_t getMinimum() const;
       uint32_t getSelection() const;
@@ -28,8 +28,8 @@ namespace terminal {
       void setSelection(uint32_t);
 
     protected:
-      virtual bool handleKeyEvent(int, Event const &);
-      virtual void paint() const;
+      virtual bool handleKey(Key const &key) override;
+      virtual void paint() const override;
 
     private:
       struct impl;

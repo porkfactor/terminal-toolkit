@@ -57,7 +57,7 @@ namespace terminal {
       pimpl_->position_ = selection;
     }
 
-    bool ProgressBar::handleKeyEvent(int, Event const &) {
+    bool ProgressBar::handleKey(Key const &k) {
       return false;
     }
 

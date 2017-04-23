@@ -21,6 +21,7 @@ add_library(terminal-toolkit SHARED
   events/ComponentEvent.cpp
   events/Event.cpp
   events/InputEvent.cpp
+  events/Key.cpp
   events/KeyEvent.cpp
   events/FocusEvent.cpp
   events/HelpEvent.cpp

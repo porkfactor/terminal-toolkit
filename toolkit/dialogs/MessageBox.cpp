@@ -133,6 +133,7 @@ namespace terminal
                     b->setText(i->second);
                     b->setBounds(1, 1, 5, 1);
                     b->addSelectionListener(&selectionListener);
+
                     pimpl_->buttons_.emplace_back(std::move(b));
                 }
             }

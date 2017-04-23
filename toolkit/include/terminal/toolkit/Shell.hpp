@@ -19,18 +19,18 @@ namespace terminal {
       Shell(Shell *, style_t = NORMAL);
       virtual ~Shell();
 
-      virtual Shell *getShell() const;
-      virtual Display *getDisplay() const;
+      virtual Shell *getShell() const override;
+      virtual Display *getDisplay() const override;
 
       virtual bool getEnabled() const;
       virtual bool getFullScreen() const;
       virtual bool getModified() const;
-      virtual void setEnabled(bool = true);
+      virtual void setEnabled(bool = true) override;
       virtual void setFullScreen(bool = true);
       virtual void setVisible(bool = true);
 
-      virtual Rectangle getBounds() const;
-      virtual Point getLocation() const;
+      virtual Rectangle getBounds() const override;
+      virtual Point getLocation() const override;
       virtual Point getMinimumSize() const;
       virtual Point getSize() const;
       virtual void setMinimumSize(uint32_t, uint32_t);
@@ -40,10 +40,10 @@ namespace terminal {
 
       virtual bool post(Event *event);
       virtual void open();
-      virtual uintptr_t window() const;
+      virtual uintptr_t window() const override;
 
     protected:
-      virtual bool handleKeyEvent(int, Event const &);
+      virtual bool handleKey(Key const &) override;
 
     private:
       struct impl;
