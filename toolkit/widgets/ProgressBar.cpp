@@ -57,11 +57,12 @@ namespace terminal {
       pimpl_->position_ = selection;
     }
 
-    bool ProgressBar::handleKey(Key const &k) {
+    bool ProgressBar::handleKeyEvent(Key const &k) {
       return false;
     }
 
     void ProgressBar::paint() const {
+#if 0
       WINDOW *w { reinterpret_cast<WINDOW *>(window()) };
       Rectangle r { getBounds() };
 
@@ -82,6 +83,7 @@ namespace terminal {
       for(uint32_t i = index; i < r.width(); i++) {
         mvwaddch(w, r.y(), r.x() + i, ' ');
       }
+#endif
     }
   }
 }

@@ -1,5 +1,6 @@
 #include <terminal/toolkit/Composite.hpp>
 #include <terminal/toolkit/Point.hpp>
+#include <terminal/toolkit/Keys.hpp>
 #include <terminal/toolkit/ttcurses.h>
 #include <vector>
 #include <algorithm>
@@ -59,7 +60,7 @@ namespace terminal {
           [](Control *c) { c->paint(); }
       );
 
-      wrefresh(reinterpret_cast<WINDOW *>(window()));
+      window().refresh();
     }
 
     const std::vector<Control *> &Composite::getChildren() const {
@@ -70,16 +71,12 @@ namespace terminal {
       return(pimpl_->tab_list_);
     }
 
-    bool Composite::handleKeyEvent(int key, Event &event) {
+    bool Composite::handleKeyEvent(Key const &key) {
       bool rv = false;
 
-      switch(key) {
-      case 0x9:
+      switch(key.vk()) {
+      case Key::TAB:
         /* TODO: determine next tab control and set focus */
-        break;
-
-      case KEY_STAB:
-        /* TODO: determine previous tab control and set focus */
         break;
       }
 

@@ -88,14 +88,18 @@ namespace terminal
 
         void Button::paint() const
         {
+#if 0
             Rectangle r(getBounds());
             WINDOW *window = reinterpret_cast<WINDOW *>(getParent()->window());
 
+
+
             wattrset(window, color() | A_REVERSE);
             mvwaddwstr(window, r.y(), r.x(), pimpl_->text_.c_str());
+#endif
         }
 
-        bool Button::handleKey(Key const &key)
+        bool Button::handleKeyEvent(Key const &key)
         {
             bool rv = false;
 

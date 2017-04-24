@@ -58,10 +58,12 @@ namespace terminal {
     }
 
     void Label::paint() const {
+#if 0
       WINDOW *window = reinterpret_cast<WINDOW *>(getParent()->window());
       const Rectangle &r(getBounds());
 
       mvwaddwstr(window, r.y(), r.x(), pimpl_->text_.c_str());
+#endif
     }
   }
 }

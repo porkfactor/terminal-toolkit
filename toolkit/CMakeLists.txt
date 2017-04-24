@@ -14,6 +14,7 @@ add_library(terminal-toolkit SHARED
   composites/Shell.cpp
   composites/TabFolder.cpp
   composites/Table.cpp
+  curses/cwindow.cpp
   dialogs/Dialog.cpp
   dialogs/FileDialog.cpp
   dialogs/MessageBox.cpp

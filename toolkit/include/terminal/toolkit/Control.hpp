@@ -7,6 +7,7 @@ namespace terminal
 {
     namespace toolkit
     {
+        class cwindow;
         class Color;
         class Composite;
         class Display;
@@ -99,11 +100,11 @@ namespace terminal
             virtual Shell *getShell() const;
             virtual Composite *getParent() const;
 
-            virtual uintptr_t window() const;
             virtual int color() const;
 
         protected:
-            virtual bool handleKey(Key const &) = 0;
+            virtual cwindow &window() const;
+            virtual bool handleKeyEvent(Key const &) = 0;
 
         private:
             struct impl;

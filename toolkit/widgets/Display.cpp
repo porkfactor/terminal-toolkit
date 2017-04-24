@@ -6,8 +6,6 @@
 #include <terminal/toolkit/ttcurses.h>
 #include <sys/select.h>
 
-#include <map>
-
 namespace terminal
 {
     namespace toolkit
@@ -29,21 +27,12 @@ namespace terminal
         Display::Display() :
             pimpl_(new impl())
         {
-            ::initscr();
-            ::start_color();
-
-            for(uint16_t f = 0; f < COLORS; f++)
-            {
-                for(uint16_t b = 0; b < COLORS; b++)
-                {
-                    ::init_pair((f * COLORS) + b, f, b);
-                }
-            }
+            cwindow::initialize();
         }
 
         Display::~Display()
         {
-            ::endwin();
+            cwindow::terminate();
         }
 
         bool Display::sleep()
@@ -78,28 +67,17 @@ namespace terminal
 
             int key;
             Shell *shell { getActiveShell() };
-            WINDOW *window
-            {
-                reinterpret_cast<WINDOW *>(shell->window()) };
 
             shell->redraw();
-
-            ::timeout(-1);
-            ::raw();
-            ::noecho();
-            ::keypad(window, TRUE);
 
             Control *control {};
             shell->paint();
 
             if((control = shell->getFocusControl()) != nullptr)
             {
-                if((key = ::wgetch(window)) != ERR)
+                if(control->handleKeyEvent(Key { shell->window().getKey() }))
                 {
-                    if(control->handleKey(Key { key }))
-                    {
 
-                    }
                 }
             }
 
@@ -133,7 +111,7 @@ namespace terminal
 
         void Display::beep() const
         {
-            ::beep();
+
         }
 
         Display *Display::getCurrent()

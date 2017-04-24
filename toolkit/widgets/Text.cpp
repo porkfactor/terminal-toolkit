@@ -2,6 +2,7 @@
 #include <terminal/toolkit/Point.hpp>
 #include <terminal/toolkit/Rectangle.hpp>
 #include <terminal/toolkit/Keys.hpp>
+#include <terminal/toolkit/Color.hpp>
 #include <terminal/toolkit/ttcurses.h>
 
 namespace terminal
@@ -121,22 +122,13 @@ namespace terminal
 
         void Text::paint() const
         {
-            WINDOW *w = reinterpret_cast<WINDOW *>(window());
-            Rectangle r(getBounds());
+            window().drawRectangle(getBounds(), Color());
+            window().drawText(pimpl_->text_, getBounds(), Color());
 
-            wattrset(w, color());
-
-            mvwaddnwstr(w, r.y(), r.x(), pimpl_->text_.c_str(), pimpl_->text_.length());
-
-            for(uint32_t i = pimpl_->text_.length(); i < r.width(); i++)
-            {
-                mvwaddch(w, r.y(), r.x() + i, ' ');
-            }
-
-            wmove(w, r.y() + pimpl_->caret_position_.y(), r.x() + pimpl_->caret_position_.x());
+            window().setCaret(Point { getBounds().x() + pimpl_->caret_position_.x(), getBounds().y() + pimpl_->caret_position_.y() } );
         }
 
-        bool Text::handleKey(Key const &key)
+        bool Text::handleKeyEvent(Key const &key)
         {
             switch(key.vk())
             {

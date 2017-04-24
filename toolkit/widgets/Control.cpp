@@ -164,14 +164,14 @@ namespace terminal
             return (pimpl_->parent_);
         }
 
-        uintptr_t Control::window() const
+        cwindow &Control::window() const
         {
-            return (reinterpret_cast<uintptr_t>(getParent()->window()));
+            return getParent()->window();
         }
 
         int Control::color() const
         {
-            return (COLOR_PAIR((COLOR_RED * COLORS) + COLOR_BLUE));
+            return 0;
         }
 
         void Control::addFocusListener(FocusListener *listener)

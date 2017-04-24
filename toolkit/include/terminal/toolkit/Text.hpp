@@ -54,7 +54,7 @@ namespace terminal
 
         protected:
             virtual void paint() const override;
-            bool handleKey(Key const &) override;
+            bool handleKeyEvent(Key const &) override;
 
         private:
             struct impl;

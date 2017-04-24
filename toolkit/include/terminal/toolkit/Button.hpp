@@ -33,7 +33,7 @@ namespace terminal
             void removeSelectionListener(SelectionListener *);
 
         protected:
-            virtual bool handleKey(Key const &) override;
+            virtual bool handleKeyEvent(Key const &) override;
             void paint() const override;
 
         private:

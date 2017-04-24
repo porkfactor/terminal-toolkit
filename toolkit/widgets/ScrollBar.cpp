@@ -97,8 +97,10 @@ namespace terminal
 
         void ScrollBar::paint() const
         {
+#if 0
             WINDOW *window = reinterpret_cast<WINDOW *>(getParent()->window());
             const Rectangle &r(getParent()->getBounds());
+#endif
         }
     }
 }

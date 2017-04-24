@@ -28,7 +28,7 @@ namespace terminal {
       void setSelection(uint32_t);
 
     protected:
-      virtual bool handleKey(Key const &key) override;
+      virtual bool handleKeyEvent(Key const &key) override;
       virtual void paint() const override;
 
     private:

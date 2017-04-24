@@ -17,22 +17,22 @@ namespace terminal
             Composite(Composite *);
             virtual ~Composite();
 
-            virtual Point computeSize(uint32_t, uint32_t, bool = false) const;
+            virtual Point computeSize(uint32_t, uint32_t, bool = false) const override;
             virtual void layout(bool = true, bool = true);
 
             virtual Layout *getLayout() const;
-            virtual bool setFocus();
+            virtual bool setFocus() override;
             virtual void setLayout(Layout *);
             virtual void setLayoutDeferred(bool);
 
-            virtual void paint() const;
+            virtual void paint() const override;
 
             std::vector<Control *> const &getChildren() const;
             std::vector<Control *> const &getTabList() const;
 
         protected:
             virtual void addChild(Control *child);
-            bool handleKeyEvent(int, Event &);
+            bool handleKeyEvent(Key const &) override;
 
         private:
             struct impl;
