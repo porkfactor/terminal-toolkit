@@ -40,8 +40,8 @@ namespace terminal
             void setText(string const &);
 
         private:
-            struct impl;
-            impl *pimpl_;
+            string text_;
+            Shell *parent_;
         };
 
         inline Dialog::button_t operator |(const Dialog::button_t &l, const Dialog::button_t &r)

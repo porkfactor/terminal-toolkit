@@ -8,42 +8,19 @@ namespace terminal
 {
     namespace toolkit
     {
-        struct Shell::impl
-        {
-            impl(Shell *parent, Display *display, Shell::style_t style) :
-                display_(display),
-                style_(style),
-                window_(parent->window(), Rectangle { 0, 0, 0, 0 })
-            {
-
-            }
-
-            impl(Display *display, Shell::style_t style) :
+        Shell::Shell(Display *display, Shell::style_t style) :
+                Composite(nullptr),
                 display_(display),
                 style_(style),
                 window_(Rectangle { 0, 0, 0, 0 })
-            {
-
-            }
-
-            ~impl()
-            {
-            }
-
-            Display *display_;
-            Shell::style_t style_;
-            cwindow window_;
-        };
-
-        Shell::Shell(Display *display, Shell::style_t style) :
-                    Composite(nullptr),
-                    pimpl_(new impl(display, style))
         {
         }
 
         Shell::Shell(Shell *parent, Shell::style_t style) :
-                    Composite(parent),
-                    pimpl_(new impl(parent, Display::getDefault(), style))
+                Composite(parent),
+                display_(nullptr),
+                style_(style),
+                window_(parent->window(), Rectangle { 0, 0, 0, 0 })
         {
 
         }
@@ -55,27 +32,27 @@ namespace terminal
 
         Display *Shell::getDisplay() const
         {
-            return (pimpl_->display_);
+            return display_;
         }
 
         Shell *Shell::getShell() const
         {
-            return (const_cast<Shell *>(this));
+            return const_cast<Shell *>(this);
         }
 
         bool Shell::getEnabled() const
         {
-            return (false);
+            return false;
         }
 
         bool Shell::getFullScreen() const
         {
-            return (false);
+            return false;
         }
 
         bool Shell::getModified() const
         {
-            return (false);
+            return false;
         }
 
         void Shell::setEnabled(bool)
@@ -125,32 +102,32 @@ namespace terminal
 
         bool Shell::handleKeyEvent(Key const &)
         {
-            return (false);
+            return false;
         }
 
         bool Shell::post(Event *event)
         {
-            return (false);
+            return false;
         }
 
         Control *Shell::getFocusControl() const
         {
             // TODO : temp bodge
-            return (getChildren().front());
+            return getChildren().front();
         }
 
         void Shell::open()
         {
-            pimpl_->display_->setActiveShell(this);
+            display_->setActiveShell(this);
             Rectangle r(getBounds());
 
-            pimpl_->window_.resize(r);
-            pimpl_->window_.refresh();
+            window_.resize(r);
+            window_.refresh();
         }
 
         cwindow &Shell::window() const
         {
-            return pimpl_->window_;
+            return window_;
         }
     }
 }

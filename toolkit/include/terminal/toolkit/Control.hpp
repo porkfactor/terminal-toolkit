@@ -2,6 +2,8 @@
 #define TERMINAL_TOOLKIT_ICONTROL_HPP_
 
 #include <terminal/toolkit/Widget.hpp>
+#include <terminal/toolkit/Rectangle.hpp>
+#include <terminal/toolkit/Color.hpp>
 
 namespace terminal
 {
@@ -107,8 +109,10 @@ namespace terminal
             virtual bool handleKeyEvent(Key const &) = 0;
 
         private:
-            struct impl;
-            impl *pimpl_;
+            Composite *parent_;
+            Rectangle bounds_;
+            Color foreground_;
+            Color background_;
         };
     }
 }

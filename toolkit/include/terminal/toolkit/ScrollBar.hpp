@@ -42,8 +42,12 @@ namespace terminal
             void paint(void) const;
 
         private:
-            struct impl;
-            impl *pimpl_;
+            Scrollable *parent_;
+            uint32_t increment_;
+            uint32_t maximum_;
+            uint32_t minimum_;
+            uint32_t page_increment_;
+            uint32_t selection_;
         };
     }
 }

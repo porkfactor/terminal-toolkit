@@ -1,7 +1,8 @@
 #ifndef TERMINAL_TOOLKIT_BUTTON_HPP_
 #define TERMINAL_TOOLKIT_BUTTON_HPP_
 
-#include "Control.hpp"
+#include <terminal/toolkit/Control.hpp>
+#include <vector>
 
 namespace terminal
 {
@@ -37,8 +38,10 @@ namespace terminal
             void paint() const override;
 
         private:
-            struct impl;
-            impl *pimpl_;
+            string text_;
+            bool greyed_;
+            bool selection_;
+            std::vector<SelectionListener *> selectionListeners_;
         };
     }
 }

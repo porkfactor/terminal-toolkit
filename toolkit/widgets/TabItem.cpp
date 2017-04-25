@@ -5,28 +5,19 @@ namespace terminal
 {
     namespace toolkit
     {
-        struct TabItem::impl
-        {
-
-            string text_;
-            string tooltip_;
-        };
-
         TabItem::TabItem(TabFolder *parent) :
-                    Item(parent),
-                    pimpl_(new impl())
+            Item(parent)
         {
 
         }
 
         TabItem::~TabItem()
         {
-            delete pimpl_;
         }
 
         string const &TabItem::getToolTipText() const
         {
-            return (pimpl_->tooltip_);
+            return (tooltip_);
         }
 
         void TabItem::setText(string const &s)
@@ -36,7 +27,7 @@ namespace terminal
 
         void TabItem::setToolTipText(string const &s)
         {
-            pimpl_->tooltip_ = s;
+            tooltip_ = s;
         }
     }
 }

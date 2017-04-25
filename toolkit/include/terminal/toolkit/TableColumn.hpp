@@ -23,8 +23,7 @@ namespace terminal
             virtual void setWidth(uint32_t);
 
         private:
-            struct impl;
-            impl *pimpl_;
+            uint32_t width_;
         };
     }
 }

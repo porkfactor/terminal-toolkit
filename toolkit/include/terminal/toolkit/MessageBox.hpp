@@ -2,11 +2,15 @@
 #define TERMINAL_TOOLKIT_MESSAGEBOX_HPP_
 
 #include <terminal/toolkit/Dialog.hpp>
+#include <terminal/toolkit/Shell.hpp>
 
 namespace terminal
 {
     namespace toolkit
     {
+        class Button;
+        class Shell;
+
         class MessageBox: public Dialog
         {
         public:
@@ -18,8 +22,11 @@ namespace terminal
             virtual void setMessage(string const &);
 
         private:
-            struct impl;
-            impl *pimpl_;
+            Dialog::button_t button_;
+            Dialog::icon_t icon_;
+            string message_;
+            std::vector<std::unique_ptr<Button> > buttons_;
+            Shell shell_;
         };
     }
 }

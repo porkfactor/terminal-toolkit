@@ -35,8 +35,8 @@ namespace terminal
             bool handleKeyEvent(Key const &) override;
 
         private:
-            struct impl;
-            impl *pimpl_;
+            std::vector<Control *> children_;
+            std::vector<Control *> tab_list_;
         };
     }
 }

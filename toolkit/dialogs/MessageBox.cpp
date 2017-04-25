@@ -86,29 +86,16 @@ namespace terminal
             }
         }
 
-        struct MessageBox::impl
-        {
-            impl(Shell *parent, Dialog::button_t button, Dialog::icon_t icon) :
-                    button_(button), icon_(icon), shell_(parent, Shell::BORDER)
-            {
-            }
-
-            Dialog::button_t button_;
-            Dialog::icon_t icon_;
-            string message_;
-            std::vector<std::unique_ptr<Button> > buttons_;
-            Shell shell_;
-        };
-
         MessageBox::MessageBox(Shell *parent, Dialog::button_t button, Dialog::icon_t icon) :
             Dialog(parent),
-            pimpl_(new impl(parent, button, icon))
+            button_(button),
+            icon_(icon),
+            shell_(parent, Shell::BORDER)
         {
         }
 
         MessageBox::~MessageBox()
         {
-            delete pimpl_;
         }
 
         int MessageBox::open()
@@ -119,32 +106,32 @@ namespace terminal
 
             MessageBoxSelectionListener selectionListener;
 
-            getPreferredSize(pimpl_->message_, width, height);
+            getPreferredSize(message_, width, height);
 
-            pimpl_->shell_.setBounds(0, 0, width, height);
-            pimpl_->shell_.open();
+            shell_.setBounds(0, 0, width, height);
+            shell_.open();
 
             for(auto i = xxx::instance_.labels_.begin(); i != xxx::instance_.labels_.end(); i++)
             {
-                if(pimpl_->button_ & i->first)
+                if(button_ & i->first)
                 {
-                    std::unique_ptr<Button> b(new Button(&pimpl_->shell_));
+                    std::unique_ptr<Button> b(new Button(&shell_));
 
                     b->setText(i->second);
                     b->setBounds(1, 1, 5, 1);
                     b->addSelectionListener(&selectionListener);
 
-                    pimpl_->buttons_.emplace_back(std::move(b));
+                    buttons_.emplace_back(std::move(b));
                 }
             }
 
-            pimpl_->shell_.paint();
+            shell_.paint();
 
             while(!selectionListener.complete())
             {
-                if(!pimpl_->shell_.getDisplay()->readAndDispatch())
+                if(!shell_.getDisplay()->readAndDispatch())
                 {
-                    pimpl_->shell_.getDisplay()->sleep();
+                    shell_.getDisplay()->sleep();
                 }
             }
 
@@ -153,12 +140,12 @@ namespace terminal
 
         string const &MessageBox::getMessage() const
         {
-            return pimpl_->message_;
+            return message_;
         }
 
         void MessageBox::setMessage(string const &message)
         {
-            pimpl_->message_ = message;
+            message_ = message;
         }
     }
 }

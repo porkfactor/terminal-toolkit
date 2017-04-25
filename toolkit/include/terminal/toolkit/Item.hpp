@@ -14,8 +14,7 @@ namespace terminal {
       virtual void setText(const string &);
 
     private:
-      struct impl;
-      impl *pimpl_;
+      string text_;
     };
   }
 }

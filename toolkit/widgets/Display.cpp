@@ -13,19 +13,8 @@ namespace terminal
         static Display *current_ = 0;
         static Display *default_ = 0;
 
-        struct Display::impl
-        {
-            impl() :
-                active_(nullptr)
-            {
-
-            }
-
-            Shell *active_;
-        };
-
         Display::Display() :
-            pimpl_(new impl())
+            active_(nullptr)
         {
             cwindow::initialize();
         }
@@ -96,12 +85,12 @@ namespace terminal
 
         Shell *Display::getActiveShell() const
         {
-            return pimpl_->active_;
+            return active_;
         }
 
         void Display::setActiveShell(Shell *active)
         {
-            pimpl_->active_ = active;
+            active_ = active;
         }
 
         Control *Display::getFocusControl() const

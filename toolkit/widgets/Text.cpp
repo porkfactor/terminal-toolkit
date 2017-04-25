@@ -9,28 +9,15 @@ namespace terminal
 {
     namespace toolkit
     {
-        struct Text::impl
-        {
-            impl() :
-                caret_position_(0, 0),
-                text_limit_(10)
-            {
-            }
-
-            Point caret_position_;
-            uint32_t text_limit_;
-            string text_;
-        };
-
         Text::Text(Composite *parent) :
             Scrollable(parent),
-            pimpl_(new impl())
+            caret_position_(0, 0),
+            text_limit_(10)
         {
         }
 
         Text::~Text()
         {
-            delete pimpl_;
         }
 
         /* Clipboard */
@@ -57,17 +44,17 @@ namespace terminal
 
         uint32_t Text::getCaretLineNumber() const
         {
-            return pimpl_->caret_position_.y();
+            return caret_position_.y();
         }
 
-        Point Text::getCaretLocation() const
+        Point const &Text::getCaretLocation() const
         {
-            return pimpl_->caret_position_;
+            return caret_position_;
         }
 
         uint32_t Text::getCaretPosition() const
         {
-            return pimpl_->caret_position_.x();
+            return caret_position_.x();
         }
 
         uint32_t Text::getLineCount() const
@@ -92,12 +79,12 @@ namespace terminal
 
         string const &Text::getText() const
         {
-            return pimpl_->text_;
+            return text_;
         }
 
         size_t Text::getTextLimit() const
         {
-            return pimpl_->text_limit_;
+            return text_limit_;
         }
 
         void Text::setSelection(uint32_t, uint32_t)
@@ -112,20 +99,22 @@ namespace terminal
 
         void Text::setText(string const &text)
         {
-            pimpl_->text_ = text;
+            text_ = text;
         }
 
         void Text::setTextLimit(size_t limit)
         {
-            pimpl_->text_limit_ = limit;
+            text_limit_ = limit;
         }
 
         void Text::paint() const
         {
-            window().drawRectangle(getBounds(), Color());
-            window().drawText(pimpl_->text_, getBounds(), Color());
+            cwindow &w { window() };
 
-            window().setCaret(Point { getBounds().x() + pimpl_->caret_position_.x(), getBounds().y() + pimpl_->caret_position_.y() } );
+            w.drawRectangle(getBounds(), Color());
+            w.drawText(text_, getBounds(), Color());
+
+            w.setCaret(Point { getBounds().x() + caret_position_.x(), getBounds().y() + caret_position_.y() } );
         }
 
         bool Text::handleKeyEvent(Key const &key)
@@ -133,31 +122,31 @@ namespace terminal
             switch(key.vk())
             {
             case Key::BACKSPACE:
-                if(pimpl_->caret_position_.x() > 0)
+                if(caret_position_.x() > 0)
                 {
-                    pimpl_->caret_position_ = Point(pimpl_->caret_position_.x() - 1, pimpl_->caret_position_.y());
-                    pimpl_->text_.erase(pimpl_->caret_position_.x(), 1);
+                    caret_position_ = Point(caret_position_.x() - 1, caret_position_.y());
+                    text_.erase(caret_position_.x(), 1);
                 }
                 break;
 
-            case Key::DOWN:
-                if(pimpl_->caret_position_.x() < pimpl_->text_.length())
+            case Key::DELETE:
+                if(caret_position_.x() < text_.length())
                 {
-                    pimpl_->text_.erase(pimpl_->caret_position_.x(), 1);
+                    text_.erase(caret_position_.x(), 1);
                 }
                 break;
 
             case Key::LEFT:
-                if(pimpl_->caret_position_.x() > 0)
+                if(caret_position_.x() > 0)
                 {
-                    pimpl_->caret_position_ = Point(pimpl_->caret_position_.x() - 1, pimpl_->caret_position_.y());
+                    caret_position_ = Point(caret_position_.x() - 1, caret_position_.y());
                 }
                 break;
 
             case Key::RIGHT:
-                if(pimpl_->caret_position_.x() < this->getBounds().width())
+                if(caret_position_.x() < this->getBounds().width())
                 {
-                    pimpl_->caret_position_ = Point(pimpl_->caret_position_.x() + 1, pimpl_->caret_position_.y());
+                    caret_position_ = Point(caret_position_.x() + 1, caret_position_.y());
                 }
                 break;
 
@@ -165,10 +154,10 @@ namespace terminal
                 break;
 
             default:
-                if(pimpl_->text_.length() < pimpl_->text_limit_)
+                if(text_.length() < text_limit_)
                 {
-                    pimpl_->text_.insert(pimpl_->text_.begin() + pimpl_->caret_position_.x(), static_cast<string::value_type>(key.code()));
-                    pimpl_->caret_position_ = Point(pimpl_->caret_position_.x() + 1, pimpl_->caret_position_.y());
+                    text_.insert(text_.begin() + caret_position_.x(), static_cast<string::value_type>(key.code()));
+                    caret_position_ = Point(caret_position_.x() + 1, caret_position_.y());
                 }
                 break;
             }

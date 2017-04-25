@@ -5,30 +5,19 @@ namespace terminal
 {
     namespace toolkit
     {
-        struct TableColumn::impl
-        {
-            impl() :
-                width_(0)
-            {
-            }
-
-            uint32_t width_;
-        };
-
         TableColumn::TableColumn(Table *parent) :
             Item(parent),
-            pimpl_(new impl())
+            width_(0)
         {
         }
 
         TableColumn::~TableColumn()
         {
-            delete pimpl_;
         }
 
         uint32_t TableColumn::getWidth() const
         {
-            return (pimpl_->width_);
+            return width_;
         }
 
         void TableColumn::setText(const string &text)

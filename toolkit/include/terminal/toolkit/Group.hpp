@@ -25,8 +25,7 @@ namespace terminal
             virtual void paint() const;
 
         private:
-            struct impl;
-            impl *pimpl_;
+            string text_;
         };
     }
 }

@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <stdint.h>
 #include "Types.hpp"
+#include <map>
 
 namespace terminal
 {
@@ -54,8 +55,7 @@ namespace terminal
             virtual void paint() const = 0;
 
         private:
-            struct impl;
-            impl *pimpl_;
+            std::map<int, std::vector<Listener *>> listeners_;
         };
     }
 }

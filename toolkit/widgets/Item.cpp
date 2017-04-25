@@ -5,14 +5,8 @@ namespace terminal
 {
     namespace toolkit
     {
-        struct Item::impl
-        {
-            string text_;
-        };
-
         Item::Item(Widget *parent) :
-            Widget(parent),
-            pimpl_(new impl())
+            Widget(parent)
         {
         }
 
@@ -23,12 +17,12 @@ namespace terminal
 
         string const &Item::getText() const
         {
-            return (pimpl_->text_);
+            return text_;
         }
 
         void Item::setText(string const &text)
         {
-            pimpl_->text_ = text;
+            text_ = text;
         }
     }
 }

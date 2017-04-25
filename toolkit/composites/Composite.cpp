@@ -7,14 +7,8 @@
 
 namespace terminal {
   namespace toolkit {
-    struct Composite::impl {
-      std::vector<Control *> children_;
-      std::vector<Control *> tab_list_;
-    };
-
     Composite::Composite(Composite *parent) :
-      Scrollable(parent),
-      pimpl_(new impl())
+      Scrollable(parent)
     {
 
     }
@@ -24,7 +18,7 @@ namespace terminal {
     }
 
     void Composite::addChild(Control *child) {
-      pimpl_->children_.push_back(child);
+      children_.push_back(child);
     }
 
     Point Composite::computeSize(uint32_t, uint32_t, bool) const {
@@ -40,7 +34,7 @@ namespace terminal {
     }
 
     bool Composite::setFocus() {
-      std::for_each(pimpl_->children_.begin(), pimpl_->children_.end(),
+      std::for_each(children_.begin(), children_.end(),
           [](Control *c) { c->setFocus(); }
       );
 
@@ -56,7 +50,7 @@ namespace terminal {
     }
 
     void Composite::paint() const {
-      std::for_each(pimpl_->children_.begin(), pimpl_->children_.end(),
+      std::for_each(children_.begin(), children_.end(),
           [](Control *c) { c->paint(); }
       );
 
@@ -64,11 +58,11 @@ namespace terminal {
     }
 
     const std::vector<Control *> &Composite::getChildren() const {
-      return(pimpl_->children_);
+      return(children_);
     }
 
     const std::vector<Control *> &Composite::getTabList() const {
-      return(pimpl_->tab_list_);
+      return(tab_list_);
     }
 
     bool Composite::handleKeyEvent(Key const &key) {

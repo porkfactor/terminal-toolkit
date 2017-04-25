@@ -7,22 +7,15 @@ namespace terminal
 {
     namespace toolkit
     {
-        struct List::impl
-        {
-
-            std::vector<string> items_;
-        };
-
         List::List(Composite *parent) :
-            Scrollable(parent),
-            pimpl_(new impl())
+            Scrollable(parent)
         {
 
         }
 
         void List::add(string const &item)
         {
-            pimpl_->items_.push_back(item);
+            items_.push_back(item);
         }
 
         void List::add(string const &item, Control::index_t index)
@@ -78,7 +71,7 @@ namespace terminal
         {
             uint32_t rv(0);
 
-            rv = pimpl_->items_.size();
+            rv = items_.size();
 
             return (rv);
         }
@@ -92,7 +85,7 @@ namespace terminal
 
         std::vector<string> List::getItems() const
         {
-            return (pimpl_->items_);
+            return (items_);
         }
 
         std::vector<string> List::getSelection() const
@@ -131,11 +124,11 @@ namespace terminal
         Control::index_t List::indexOf(string const &string) const
         {
             Control::index_t rv(Control::npos);
-            decltype(pimpl_->items_.begin()) it;
+            decltype(items_.begin()) it;
 
-            if((it = std::find(pimpl_->items_.begin(), pimpl_->items_.end(), string)) != pimpl_->items_.end())
+            if((it = std::find(items_.begin(), items_.end(), string)) != items_.end())
             {
-                rv = std::distance(pimpl_->items_.begin(), it);
+                rv = std::distance(items_.begin(), it);
             }
 
             return (rv);
@@ -155,7 +148,7 @@ namespace terminal
 
         void List::remove(Control::index_t index)
         {
-            pimpl_->items_.erase(pimpl_->items_.begin() + index);
+            items_.erase(items_.begin() + index);
         }
 
         void List::remove(std::vector<Control::index_t> const &indices)
@@ -165,7 +158,7 @@ namespace terminal
 
         void List::remove(Control::index_t start, Control::index_t end)
         {
-            pimpl_->items_.erase(pimpl_->items_.begin() + start, pimpl_->items_.begin() + end);
+            items_.erase(items_.begin() + start, items_.begin() + end);
         }
 
         void List::remove(string string)
@@ -175,7 +168,7 @@ namespace terminal
 
         void List::removeAll()
         {
-            pimpl_->items_.clear();
+            items_.clear();
         }
 
         void List::removeSelectionListener(SelectionListener *listener)

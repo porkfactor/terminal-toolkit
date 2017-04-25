@@ -61,8 +61,8 @@ namespace terminal
             size_t getItemCount() const;
 
         private:
-            struct impl;
-            impl *pimpl_;
+            std::vector<std::unique_ptr<TableColumn> > columns_;
+            std::vector<std::unique_ptr<TableItem> > items_;
         };
     }
 }

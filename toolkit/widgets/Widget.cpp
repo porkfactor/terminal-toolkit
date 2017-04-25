@@ -7,24 +7,12 @@ namespace terminal
 {
     namespace toolkit
     {
-        struct Widget::impl
-        {
-            impl()
-            {
-
-            }
-
-            std::map<int, std::vector<Listener *>> listeners_;
-        };
-
-        Widget::Widget(Widget *parent) :
-            pimpl_(new impl())
+        Widget::Widget(Widget *parent)
         {
         }
 
         Widget::~Widget()
         {
-            delete pimpl_;
         }
 
         Display *Widget::getDisplay() const
@@ -44,14 +32,14 @@ namespace terminal
 
         void Widget::addListener(int event, Listener *l)
         {
-            pimpl_->listeners_[event].push_back(l);
+            listeners_[event].push_back(l);
         }
 
         void Widget::notifyListeners(int event, const Event &e) const
         {
             std::map<int, std::vector<Listener *> >::const_iterator i;
 
-            if((i = pimpl_->listeners_.find(event)) != pimpl_->listeners_.end())
+            if((i = listeners_.find(event)) != listeners_.end())
             {
                 const std::vector<Listener *> &listeners(i->second);
 
@@ -66,7 +54,7 @@ namespace terminal
         {
             std::map<int, std::vector<Listener *> >::iterator i;
 
-            if((i = pimpl_->listeners_.find(event)) != pimpl_->listeners_.end())
+            if((i = listeners_.find(event)) != listeners_.end())
             {
                 std::vector<Listener *> &listeners(i->second);
 

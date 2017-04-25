@@ -35,8 +35,10 @@ namespace terminal
             void setOverwrite(bool);
 
         private:
-            struct impl;
-            impl *pimpl_;
+            FileDialog::style_t style_;
+            bool overwrite_;
+            string file_;
+            string directory_;
         };
     }
 }

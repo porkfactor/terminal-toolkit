@@ -30,8 +30,8 @@ namespace terminal
             void setToolTipText(string const &string);
 
         private:
-            struct impl;
-            impl *pimpl_;
+            string text_;
+            string tooltip_;
         };
     }
 }

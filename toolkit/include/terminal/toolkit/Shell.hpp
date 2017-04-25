@@ -1,8 +1,8 @@
 #ifndef TERMINAL_TOOLKIT_SHELL_HPP_
 #define TERMINAL_TOOLKIT_SHELL_HPP_
 
-#include <memory>
 #include <terminal/toolkit/Composite.hpp>
+#include <terminal/toolkit/ttcurses.h>
 
 namespace terminal
 {
@@ -51,8 +51,9 @@ namespace terminal
             virtual bool handleKeyEvent(Key const &) override;
 
         private:
-            struct impl;
-            impl *pimpl_;
+            Display *display_;
+            Shell::style_t style_;
+            mutable cwindow window_;
         };
     }
 }

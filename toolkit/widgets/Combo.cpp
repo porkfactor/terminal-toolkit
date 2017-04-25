@@ -5,25 +5,19 @@ namespace terminal
 {
     namespace toolkit
     {
-        struct Combo::impl
-        {
-            std::vector<string> items_;
-        };
-
         Combo::Combo(Composite *parent) :
-            Composite(parent),
-            pimpl_(new impl())
+            Composite(parent)
         {
         }
 
         void Combo::add(string const &s)
         {
-            pimpl_->items_.push_back(s);
+            items_.push_back(s);
         }
 
         void Combo::add(string const &s, Control::index_t index)
         {
-            pimpl_->items_[index] = s;
+            items_[index] = s;
         }
 
         void Combo::addModifyListener(ModifyListener *listener)
@@ -63,12 +57,12 @@ namespace terminal
 
         string Combo::getItem(Control::index_t index) const
         {
-            return pimpl_->items_[index];
+            return items_[index];
         }
 
         uint32_t Combo::getItemCount() const
         {
-            return pimpl_->items_.size();
+            return items_.size();
         }
 
         uint32_t Combo::indexOf(string const &s) const
@@ -79,11 +73,11 @@ namespace terminal
         uint32_t Combo::indexOf(string const &s, Control::index_t index) const
         {
             uint32_t rv = -1;
-            auto it = std::find(pimpl_->items_.begin() + index, pimpl_->items_.end(), s);
+            auto it = std::find(items_.begin() + index, items_.end(), s);
 
-            if(it != pimpl_->items_.end())
+            if(it != items_.end())
             {
-                rv = std::distance(pimpl_->items_.begin(), it);
+                rv = std::distance(items_.begin(), it);
             }
 
             return rv;
@@ -91,25 +85,25 @@ namespace terminal
 
         void Combo::remove(Control::index_t index)
         {
-            if(index < pimpl_->items_.size())
+            if(index < items_.size())
             {
-                pimpl_->items_.erase(pimpl_->items_.begin() + index);
+                items_.erase(items_.begin() + index);
             }
         }
 
         void Combo::remove(Control::index_t start, Control::index_t end)
         {
-            pimpl_->items_.erase(pimpl_->items_.begin() + start, pimpl_->items_.begin() + end);
+            items_.erase(items_.begin() + start, items_.begin() + end);
         }
 
         void Combo::remove(string const &s)
         {
-            pimpl_->items_.erase(std::find(pimpl_->items_.begin(), pimpl_->items_.end(), s));
+            items_.erase(std::find(items_.begin(), items_.end(), s));
         }
 
         void Combo::removeAll()
         {
-            pimpl_->items_.clear();
+            items_.clear();
         }
     }
 }

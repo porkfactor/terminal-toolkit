@@ -2,7 +2,7 @@
 #define TERMINAL_TOOLKIT_TEXT_HPP_
 
 #include <terminal/toolkit/Scrollable.hpp>
-#include <string>
+#include <terminal/toolkit/Point.hpp>
 
 namespace terminal
 {
@@ -33,7 +33,7 @@ namespace terminal
 
             /* caret */
             uint32_t getCaretLineNumber() const;
-            Point getCaretLocation() const;
+            Point const &getCaretLocation() const;
             uint32_t getCaretPosition() const;
 
             /* selection */
@@ -57,8 +57,9 @@ namespace terminal
             bool handleKeyEvent(Key const &) override;
 
         private:
-            struct impl;
-            impl *pimpl_;
+            string text_;
+            Point caret_position_;
+            uint32_t text_limit_;
         };
     }
 }

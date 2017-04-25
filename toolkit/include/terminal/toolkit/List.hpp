@@ -60,8 +60,7 @@ namespace terminal
             void showSelection();
 
         private:
-            struct impl;
-            impl *pimpl_;
+            std::vector<string> items_;
         };
     }
 }

@@ -70,8 +70,7 @@ namespace terminal
             void setVisibleItemCount(int count);
 
         private:
-            struct impl;
-            std::unique_ptr<impl> pimpl_;
+            std::vector<string> items_;
         };
     }
 }

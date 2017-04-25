@@ -11,29 +11,16 @@ namespace terminal
 {
     namespace toolkit
     {
-        struct Button::impl
-        {
-            impl() :
-                    greyed_(false), selection_(false)
-            {
-            }
-
-            string text_;
-            bool greyed_;
-            bool selection_;
-            std::vector<SelectionListener *> selectionListeners_;
-        };
-
         Button::Button(Composite *parent) :
             Control(parent),
-            pimpl_(new impl())
+            greyed_(false),
+            selection_(false)
         {
 
         }
 
         Button::~Button()
         {
-            delete pimpl_;
         }
 
         Point Button::computeSize(uint32_t, uint32_t, bool = false) const
@@ -43,22 +30,22 @@ namespace terminal
 
         bool Button::getGreyed() const
         {
-            return pimpl_->greyed_;
+            return greyed_;
         }
 
         bool Button::getSelection() const
         {
-            return pimpl_->selection_;
+            return selection_;
         }
 
         void Button::setGreyed(bool greyed)
         {
-            pimpl_->greyed_ = greyed;
+            greyed_ = greyed;
         }
 
         void Button::setSelection(bool selection)
         {
-            pimpl_->selection_ = selection;
+            selection_ = selection;
         }
 
         bool Button::setFocus()
@@ -68,17 +55,17 @@ namespace terminal
 
         string const &Button::getText() const
         {
-            return (pimpl_->text_);
+            return (text_);
         }
 
         void Button::setText(const string &text)
         {
-            pimpl_->text_ = text;
+            text_ = text;
         }
 
         void Button::addSelectionListener(SelectionListener *listener)
         {
-            pimpl_->selectionListeners_.push_back(listener);
+            selectionListeners_.push_back(listener);
         }
 
         void Button::removeSelectionListener(SelectionListener *listener)
@@ -95,7 +82,7 @@ namespace terminal
 
 
             wattrset(window, color() | A_REVERSE);
-            mvwaddwstr(window, r.y(), r.x(), pimpl_->text_.c_str());
+            mvwaddwstr(window, r.y(), r.x(), text_.c_str());
 #endif
         }
 
@@ -106,7 +93,7 @@ namespace terminal
             switch(key.vk())
             {
             case Key::ENTER:
-                for(auto i : pimpl_->selectionListeners_)
+                for(auto i : selectionListeners_)
                 {
                     i->widgetSelected(SelectionEvent(Event()));
                 }

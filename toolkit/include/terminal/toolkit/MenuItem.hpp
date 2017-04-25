@@ -43,8 +43,10 @@ namespace terminal
             void setText(string const &string);
 
         private:
-            struct impl;
-            impl *pimpl_;
+            string text_;
+            Menu *parent_;
+            Menu *menu_;
+            bool enabled_;
         };
     }
 }

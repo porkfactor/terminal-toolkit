@@ -2,7 +2,7 @@
 #define TERMINAL_TOOLKIT_TABLEITEM_HPP_
 
 #include <terminal/toolkit/Item.hpp>
-#include <string>
+#include <vector>
 
 namespace terminal
 {
@@ -40,8 +40,9 @@ namespace terminal
             virtual void setText(uint32_t, string const &);
 
         private:
-            struct impl;
-            impl *pimpl_;
+            struct Cell;
+            Table *parent_;
+            std::vector<Cell *> data_;
         };
     }
 }

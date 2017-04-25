@@ -3,43 +3,45 @@
 
 #include <memory>
 
-namespace terminal {
-  namespace toolkit {
-    class Control;
-    class Rectangle;
-    class Shell;
+namespace terminal
+{
+    namespace toolkit
+    {
+        class Control;
+        class Rectangle;
+        class Shell;
 
-    class Display {
-    public:
-      Display();
-      virtual ~Display();
+        class Display
+        {
+        public:
+            Display();
+            virtual ~Display();
 
-      void beep() const;
-      void close();
-      bool readAndDispatch();
-      bool sleep();
-      void wake();
+            void beep() const;
+            void close();
+            bool readAndDispatch();
+            bool sleep();
+            void wake();
 
-      Shell *getActiveShell() const;
-      void setActiveShell(Shell *);
+            Shell *getActiveShell() const;
+            void setActiveShell(Shell *);
 
-      Control *getFocusControl() const;
+            Control *getFocusControl() const;
 
-      Rectangle getBounds() const;
-      Rectangle getClientArea() const;
+            Rectangle getBounds() const;
+            Rectangle getClientArea() const;
 
-      static Display *getDefault();
-      static Display *getCurrent();
+            static Display *getDefault();
+            static Display *getCurrent();
 
-    protected:
-      void init();
-      void release();
+        protected:
+            void init();
+            void release();
 
-    private:
-      struct impl;
-      impl *pimpl_;
-    };
-  }
+        private:
+            Shell *active_;
+        };
+    }
 }
 
 #endif

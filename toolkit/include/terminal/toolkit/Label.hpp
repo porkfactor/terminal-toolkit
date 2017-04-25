@@ -27,8 +27,9 @@ namespace terminal
             virtual void paint(void) const;
 
         private:
-            struct impl;
-            impl *pimpl_;
+            Control::alignment_t alignment_;
+            string text_;
+            const Image *image_;
         };
     }
 }

@@ -4,17 +4,8 @@
 
 namespace terminal {
   namespace toolkit {
-    struct Table::impl {
-      impl(Table::style_t) {
-      }
-
-      std::vector<std::unique_ptr<TableColumn> > columns_;
-      std::vector<std::unique_ptr<TableItem> > items_;
-    };
-
     Table::Table(Composite *parent, Table::style_t style) :
-      Composite(parent),
-      pimpl_(new impl(style))
+      Composite(parent)
     {
     }
 

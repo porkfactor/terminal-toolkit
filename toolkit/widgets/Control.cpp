@@ -10,23 +10,10 @@ namespace terminal
 {
     namespace toolkit
     {
-        struct Control::impl
-        {
-            impl(Composite *parent) :
-                    parent_(parent), bounds_(0, 0, 0, 0)
-            {
-
-            }
-
-            Composite *parent_;
-            Rectangle bounds_;
-            Color foreground_;
-            Color background_;
-        };
-
         Control::Control(Composite *parent) :
             Widget(parent),
-            pimpl_(new impl(parent))
+            parent_(parent),
+            bounds_(0, 0, 0, 0)
         {
             if(parent)
             {
@@ -36,27 +23,26 @@ namespace terminal
 
         Control::~Control()
         {
-            delete pimpl_;
         }
 
         Color Control::getBackground() const
         {
-            return (pimpl_->background_);
+            return (background_);
         }
 
         Color Control::getForeground() const
         {
-            return (pimpl_->foreground_);
+            return (foreground_);
         }
 
         void Control::setForeground(Color fg)
         {
-            pimpl_->foreground_ = fg;
+            foreground_ = fg;
         }
 
         void Control::setBackgrund(Color bg)
         {
-            pimpl_->background_ = bg;
+            background_ = bg;
         }
 
         void Control::pack(bool)
@@ -116,12 +102,12 @@ namespace terminal
 
         Rectangle Control::getBounds() const
         {
-            return (pimpl_->bounds_);
+            return (bounds_);
         }
 
         Point Control::getLocation() const
         {
-            return (Point(pimpl_->bounds_.x(), pimpl_->bounds_.y()));
+            return (Point(bounds_.x(), bounds_.y()));
         }
 
         void Control::setBounds(uint32_t x, uint32_t y, uint32_t width, uint32_t height, bool)
@@ -131,7 +117,7 @@ namespace terminal
 
         void Control::setBounds(const Rectangle &r)
         {
-            pimpl_->bounds_ = r;
+            bounds_ = r;
         }
 
         void Control::setLocation(uint32_t, uint32_t)
@@ -156,12 +142,12 @@ namespace terminal
 
         Shell *Control::getShell() const
         {
-            return (getParent()->getShell());
+            return getParent()->getShell();
         }
 
         Composite *Control::getParent() const
         {
-            return (pimpl_->parent_);
+            return parent_;
         }
 
         cwindow &Control::window() const
