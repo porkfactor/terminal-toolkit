@@ -144,7 +144,7 @@ namespace terminal
                 break;
 
             case Key::RIGHT:
-                if(caret_position_.x() < this->getBounds().width())
+                if(caret_position_.x() < text_limit_)
                 {
                     caret_position_ = Point(caret_position_.x() + 1, caret_position_.y());
                 }
@@ -156,6 +156,10 @@ namespace terminal
             default:
                 if(text_.length() < text_limit_)
                 {
+                    if(text_.length() < caret_position_.x())
+                    {
+                        text_.resize(caret_position_.x(), L' ');
+                    }
                     text_.insert(text_.begin() + caret_position_.x(), static_cast<string::value_type>(key.code()));
                     caret_position_ = Point(caret_position_.x() + 1, caret_position_.y());
                 }
