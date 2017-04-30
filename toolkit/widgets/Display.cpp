@@ -64,6 +64,8 @@ namespace terminal
 
             if((control = shell->getFocusControl()) != nullptr)
             {
+                control->paint();
+
                 if(control->handleKeyEvent(Key { shell->window().getKey() }))
                 {
 

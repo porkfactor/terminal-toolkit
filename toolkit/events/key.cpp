@@ -15,6 +15,8 @@ namespace terminal
         static auto translate_virtual_key(int key) -> Key::virtual_key
         {
             static std::map<int, Key::virtual_key> keys {
+                { 0011,          Key::TAB, },
+                { 0012,          Key::ENTER, },
                 { KEY_DOWN,      Key::DOWN, },
                 { KEY_UP,        Key::UP, },
                 { KEY_LEFT,      Key::LEFT, },

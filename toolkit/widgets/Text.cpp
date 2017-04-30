@@ -12,7 +12,7 @@ namespace terminal
         Text::Text(Composite *parent) :
             Scrollable(parent),
             caret_position_(0, 0),
-            text_limit_(10)
+            limit_(10)
         {
         }
 
@@ -84,7 +84,7 @@ namespace terminal
 
         size_t Text::getTextLimit() const
         {
-            return text_limit_;
+            return limit_;
         }
 
         void Text::setSelection(uint32_t, uint32_t)
@@ -104,7 +104,7 @@ namespace terminal
 
         void Text::setTextLimit(size_t limit)
         {
-            text_limit_ = limit;
+            limit_ = limit;
         }
 
         void Text::paint() const
@@ -119,6 +119,8 @@ namespace terminal
 
         bool Text::handleKeyEvent(Key const &key)
         {
+            bool rv { false };
+
             switch(key.vk())
             {
             case Key::BACKSPACE:
@@ -144,7 +146,7 @@ namespace terminal
                 break;
 
             case Key::RIGHT:
-                if(caret_position_.x() < text_limit_)
+                if(caret_position_.x() < limit_)
                 {
                     caret_position_ = Point(caret_position_.x() + 1, caret_position_.y());
                 }
@@ -154,19 +156,24 @@ namespace terminal
                 break;
 
             default:
-                if(text_.length() < text_limit_)
+                /* if this is not a local edit event, attempt to bubble-up */
+                if(!(rv = Control::handleKeyEvent(key)))
                 {
-                    if(text_.length() < caret_position_.x())
+                    /* if not consumed, attempt to handle as input data */
+                    if(text_.length() < limit_)
                     {
-                        text_.resize(caret_position_.x(), L' ');
+                        if(text_.length() < caret_position_.x())
+                        {
+                            text_.resize(caret_position_.x(), L' ');
+                        }
+                        text_.insert(text_.begin() + caret_position_.x(), static_cast<string::value_type>(key.code()));
+                        caret_position_ = Point(caret_position_.x() + 1, caret_position_.y());
                     }
-                    text_.insert(text_.begin() + caret_position_.x(), static_cast<string::value_type>(key.code()));
-                    caret_position_ = Point(caret_position_.x() + 1, caret_position_.y());
                 }
                 break;
             }
 
-            return false;
+            return rv;
         }
     }
 }

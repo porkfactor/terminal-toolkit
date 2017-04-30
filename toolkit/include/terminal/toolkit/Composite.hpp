@@ -20,6 +20,7 @@ namespace terminal
             virtual Point computeSize(uint32_t, uint32_t, bool = false) const override;
             virtual void layout(bool = true, bool = true);
 
+            virtual Control *getFocusControl() const;
             virtual Layout *getLayout() const;
             virtual bool setFocus() override;
             virtual void setLayout(Layout *);
@@ -30,13 +31,20 @@ namespace terminal
             std::vector<Control *> const &getChildren() const;
             std::vector<Control *> const &getTabList() const;
 
+
         protected:
             virtual void addChild(Control *child);
             bool handleKeyEvent(Key const &) override;
 
+            bool focusFirst();
+            bool focusLast();
+            bool focusNext();
+            bool focusPrevious();
+
         private:
             std::vector<Control *> children_;
             std::vector<Control *> tab_list_;
+            Control *focus_;
         };
     }
 }

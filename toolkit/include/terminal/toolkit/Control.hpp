@@ -106,7 +106,15 @@ namespace terminal
 
         protected:
             virtual cwindow &window() const;
-            virtual bool handleKeyEvent(Key const &) = 0;
+
+            /*
+             * Bubble-up a key event
+             *
+             * @param key key event
+             * @return true the event was consumed
+             * @return false the event was not consumed
+             */
+            virtual bool handleKeyEvent(Key const &);
 
         private:
             Composite *parent_;

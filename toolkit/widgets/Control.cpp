@@ -155,6 +155,18 @@ namespace terminal
             return getParent()->window();
         }
 
+        bool Control::handleKeyEvent(Key const &key)
+        {
+            bool rv { false };
+
+            if(parent_)
+            {
+                rv = parent_->handleKeyEvent(key);
+            }
+
+            return rv;
+        }
+
         int Control::color() const
         {
             return 0;

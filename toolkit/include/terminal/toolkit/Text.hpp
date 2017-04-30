@@ -59,7 +59,7 @@ namespace terminal
         private:
             string text_;
             Point caret_position_;
-            uint32_t text_limit_;
+            uint32_t limit_;
         };
     }
 }

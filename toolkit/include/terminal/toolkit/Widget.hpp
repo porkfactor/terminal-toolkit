@@ -26,7 +26,7 @@ namespace terminal
             virtual Display *getDisplay() const;
 
             virtual bool isDisposed() const;
-            virtual bool isListening(int event) const;
+            virtual bool isListening(event_type event) const;
 
             /**
              * @brief Add an event listener

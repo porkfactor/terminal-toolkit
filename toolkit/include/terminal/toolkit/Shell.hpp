@@ -41,7 +41,7 @@ namespace terminal
             virtual void setMinimumSize(uint32_t, uint32_t);
             virtual void setMinimumSize(const Point &);
 
-            virtual Control *getFocusControl() const;
+            virtual Control *getFocusControl() const override;
 
             virtual bool post(Event *event);
             virtual void open();

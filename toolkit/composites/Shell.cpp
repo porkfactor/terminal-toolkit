@@ -100,9 +100,9 @@ namespace terminal
 
         }
 
-        bool Shell::handleKeyEvent(Key const &)
+        bool Shell::handleKeyEvent(Key const &key)
         {
-            return false;
+            return Composite::handleKeyEvent(key);
         }
 
         bool Shell::post(Event *event)
@@ -112,14 +112,15 @@ namespace terminal
 
         Control *Shell::getFocusControl() const
         {
-            // TODO : temp bodge
-            return getChildren().front();
+            return Composite::getFocusControl();
         }
 
         void Shell::open()
         {
             display_->setActiveShell(this);
             Rectangle r(getBounds());
+
+            focusFirst();
 
             window_.resize(r);
             window_.refresh();
